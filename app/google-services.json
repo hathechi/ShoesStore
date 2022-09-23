@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1096742592157",
+    "firebase_url": "https://realtimedata-1e0aa-default-rtdb.firebaseio.com",
+    "project_id": "realtimedata-1e0aa",
+    "storage_bucket": "realtimedata-1e0aa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1096742592157:android:016ffb3e4ea680b0803e74",
+        "android_client_info": {
+          "package_name": "com.example.shoesstore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1096742592157-1fkcndtslp5mite9gp371jgjf85qmrlg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.shoesstore",
+            "certificate_hash": "edf9831ebc0ee3e0c3f3c0a0be3cdb03d871a4d0"
+          }
+        },
+        {
+          "client_id": "1096742592157-3v64eth7thvmdpuk7jmhvth121sja39a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPBi_nnj8kjPDp0XH5SAGGIvzhKXOZKAY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1096742592157-3v64eth7thvmdpuk7jmhvth121sja39a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

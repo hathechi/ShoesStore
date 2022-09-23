@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#A8DCE4"
+    android:orientation="vertical"
+    android:paddingBottom="50dp">
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="30dp">
+
+        <EditText
+            android:id="@+id/etIDsp"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/botron_edittext"
+            android:ems="10"
+            android:hint="ID ... "
+            android:inputType="number"
+            android:paddingLeft="30dp" />
+
+        <EditText
+            android:id="@+id/etTensp"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/botron_edittext"
+            android:ems="10"
+            android:hint="Tên Sản Phẩm"
+            android:inputType="textUri"
+            android:paddingLeft="30dp" />
+
+        <EditText
+            android:id="@+id/etGia"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/botron_edittext"
+            android:ems="10"
+            android:hint="Giá"
+            android:inputType="number"
+            android:paddingLeft="30dp"
+             />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/spinnerAdd"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_weight="1"
+                />
+
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/etMota"
+            android:layout_width="match_parent"
+
+            android:layout_height="60dp"
+            android:layout_marginBottom="20dp"
+
+            android:background="@drawable/botron_edittext"
+            android:ems="10"
+            android:hint="Mô Tả"
+            android:paddingLeft="30dp" />
+
+
+        <Button
+            android:id="@+id/btnChonhinh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_weight="1"
+            android:background="@drawable/botron_edittext"
+            android:text="Chọn Hình" />
+
+        <ImageView
+            android:id="@+id/iv_view"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/icon_add" />
+
+        <Button
+            android:id="@+id/btnAdd"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/botron_edittext"
+            android:backgroundTint="@drawable/state_button"
+            android:text="THÊM"
+            android:textColor="@color/white" />
+    </LinearLayout>
+</LinearLayout>
