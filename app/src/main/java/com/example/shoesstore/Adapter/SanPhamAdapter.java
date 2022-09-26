@@ -41,7 +41,7 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.SanPhamV
         if (sanPham == null) {
             return;
         }
-        holder.tv_sanpham_home.setText(sanPham.getTitle_sanpham());
+        holder.tv_sanpham_home.setText(sanPham.getGia_sanpham() + " $");
         //sử dụng thư viện Glide để set hình từ url
         Glide.with(context).load(mSanPham.get(position).getImage_sanpham()).into(holder.iv_sanpham_home);
     }
@@ -62,7 +62,7 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.SanPhamV
         public SanPhamViewHoder(@NonNull @NotNull View itemView) {
             super(itemView);
             iv_sanpham_home = itemView.findViewById(R.id.iv_sanpham_home);
-            tv_sanpham_home = itemView.findViewById(R.id.tv_sanpham_home);
+            tv_sanpham_home = itemView.findViewById(R.id.tv_gia_sanpham_home);
         }
     }
 }

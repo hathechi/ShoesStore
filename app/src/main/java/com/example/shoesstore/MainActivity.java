@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //set Fragment home cho app
-        replaceFragment(new FragmentThuongHieu());
+        replaceFragment(new FragmentHome());
 
         //set ToolBar
         final Toolbar toolbar = findViewById(R.id.toolbar);

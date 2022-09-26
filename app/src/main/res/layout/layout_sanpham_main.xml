@@ -9,7 +9,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingTop="5dp">
 
         <TextView
             android:id="@+id/tv_sanpham1_home"
@@ -18,19 +19,19 @@
             android:gravity="center"
             android:text="Title"
             android:textColor="@color/black"
-            android:textSize="20dp" />
+            android:textSize="22dp"
+            android:textStyle="bold"/>
 
 
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            app:cardCornerRadius="20dp">
+            android:layout_height="wrap_content">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="20dp">
+                android:layout_margin="5dp"
+                app:cardCornerRadius="10dp">
 
                 <TextView
                     android:id="@+id/tv_thuonghieu1_home"
@@ -38,14 +39,15 @@
                     android:layout_height="wrap_content"
                     android:padding="10dp"
                     android:text="ThuongHieu"
-                    android:textSize="18dp" />
+                    android:textSize="14dp" />
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                app:cardCornerRadius="20dp">
+                android:layout_margin="5dp"
+                app:cardCornerRadius="10dp">
 
                 <TextView
                     android:id="@+id/tv_gia_home"
@@ -53,27 +55,28 @@
                     android:layout_height="wrap_content"
                     android:padding="10dp"
                     android:text="Gia"
-                    android:textSize="20dp" />
+                    android:textSize="16dp" />
             </androidx.cardview.widget.CardView>
 
             <ImageView
                 android:id="@+id/iv_sanpham1_home"
                 android:layout_width="200dp"
-                android:layout_height="300dp"
-                 />
+                android:layout_height="300dp" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                app:cardCornerRadius="10dp">
+                app:cardCornerRadius="5dp"
+                android:layout_margin="10dp">
 
                 <TextView
                     android:id="@+id/tv_mota_home"
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
                     android:text="Mới"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
             </androidx.cardview.widget.CardView>
         </androidx.cardview.widget.CardView>
 

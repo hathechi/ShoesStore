@@ -3,12 +3,12 @@ package com.example.shoesstore.Moder;
 public class SanPham {
     private int id_sanpham;
     private String image_sanpham;
-    private String title_sanpham;
+    private int gia_sanpham;
 
-    public SanPham(int id_sanpham, String image_sanpham, String title_sanpham) {
+    public SanPham(int id_sanpham, String image_sanpham, int gia_sanpham) {
         this.id_sanpham = id_sanpham;
         this.image_sanpham = image_sanpham;
-        this.title_sanpham = title_sanpham;
+        this.gia_sanpham = gia_sanpham;
     }
 
     public int getId_sanpham() {
@@ -27,11 +27,11 @@ public class SanPham {
         this.image_sanpham = image_sanpham;
     }
 
-    public String getTitle_sanpham() {
-        return title_sanpham;
+    public int getGia_sanpham() {
+        return gia_sanpham;
     }
 
-    public void setTitle_sanpham(String title_sanpham) {
-        this.title_sanpham = title_sanpham;
+    public void setGia_sanpham(int gia_sanpham) {
+        this.gia_sanpham = gia_sanpham;
     }
 }

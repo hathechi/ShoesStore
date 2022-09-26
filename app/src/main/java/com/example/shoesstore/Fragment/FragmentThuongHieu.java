@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -41,6 +42,7 @@ public class FragmentThuongHieu extends Fragment {
     private RecyclerView rcvEditThuongHieu;
     private ThuongHieuSwipeAdapter thuongHieuSwipeAdapter;
     private List<ThuongHieu> mThuongHieuList = new ArrayList<>();
+    private int id = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -183,7 +185,7 @@ public class FragmentThuongHieu extends Fragment {
 
         //Ánh xạ
         //sau mỗi lần thêm cho id tự tăng thêm 1
-        final int[] id = {0};
+
         EditText etThuongHieu = view.findViewById(R.id.etThuongHieu);
         Button btnAddThuongHieu_dialog = view.findViewById(R.id.btnAddThuongHieu_dialog);
         btnAddThuongHieu_dialog.setOnClickListener(new View.OnClickListener() {
@@ -194,9 +196,16 @@ public class FragmentThuongHieu extends Fragment {
                     FancyToast.makeText(getContext(), "Chưa Nhập Tên Thương Hiệu ! ",
                             FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
                 } else {
+                    //lấy ra id rồi +1 vào id đó
+                    for (int i = 0; i < mThuongHieuList.size(); i++) {
+                        id = mThuongHieuList.get(mThuongHieuList.size() - 1).getId_thuonghieu();
+                        Log.i("id", "onClick: " + id);
+                        break;
+                    }
+
                     ThuongHieuDAO thuongHieuDAO = new ThuongHieuDAO();
-                    ThuongHieu thuongHieu = new ThuongHieu(id[0], tenThuongHieu);
-                    id[0] += 1;
+                    ThuongHieu thuongHieu = new ThuongHieu(id + 1, tenThuongHieu);
+
                     thuongHieuDAO.insertThuongHieu(thuongHieu);
 
                     AlertThongBao();

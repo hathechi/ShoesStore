@@ -3,30 +3,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="300dp"
     android:layout_height="400dp"
-    app:cardCornerRadius="10dp"
-    android:layout_margin="15dp">
+    android:layout_margin="10dp"
+    app:cardCornerRadius="10dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        app:cardCornerRadius="10dp"
+        android:layout_margin="5dp">
 
         <TextView
-            android:id="@+id/tv_sanpham_home"
+            android:id="@+id/tv_gia_sanpham_home"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Title"
             android:gravity="center"
-            android:textColor="@color/black"
-            android:textSize="20dp" />
+            android:padding="10dp"
+            android:text="Title"
+            android:textColor="#FF6D00"
+            android:textSize="28dp" />
+    </androidx.cardview.widget.CardView>
 
-        <ImageView
-            android:id="@+id/iv_sanpham_home"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/giay2" />
+    <ImageView
+        android:id="@+id/iv_sanpham_home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
 
+    </ImageView>
 
-    </LinearLayout>
 
 </androidx.cardview.widget.CardView>

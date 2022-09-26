@@ -58,6 +58,7 @@ import java.util.List;
  */
 public class FragmentSanPham extends Fragment {
     ImageButton imgButton_thuonghieu;
+
     BottomSheetDialog dialog;
     Spinner spinner;
     ImageView iv_view;
@@ -67,7 +68,6 @@ public class FragmentSanPham extends Fragment {
     private QLSanPhamAdapter qlSanPhamAdapter;
     private List<SanPhamMain> sanPhamMains = new ArrayList<>();
     private List<String> listSpiner = new ArrayList<>();
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -86,6 +86,7 @@ public class FragmentSanPham extends Fragment {
         //set Adapter cho fragment quản lý sản phẩm
         rcvQlsanpham = view.findViewById(R.id.rcv_sanpham_fragment);
         setAdapterQLsanpham();
+
 
         imgButton_thuonghieu = view.findViewById(R.id.imgButton_add_thuonghieu);
         imgButton_thuonghieu.setOnClickListener(new View.OnClickListener() {
@@ -117,7 +118,7 @@ public class FragmentSanPham extends Fragment {
                 });
 
                 iv_view = dialogsheetview.findViewById(R.id.iv_view);
-//btn CHọn hình
+                //btn CHọn hình
                 Button btnTest = dialogsheetview.findViewById(R.id.btnChonhinh);
                 btnTest.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -145,6 +146,15 @@ public class FragmentSanPham extends Fragment {
                                 return;
                             }
 
+                            //check xem id nhập vào có trùng với id cũ hay không
+                            for (SanPhamMain check : sanPhamMains) {
+                                if (idSp.equals(String.valueOf(check.getId_sanpham1()))) {
+                                    FancyToast.makeText(getContext(), "ID Trùng Nhau! - Nhập ID Mới ", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
+                                    return;
+
+                                }
+                            }
+                            //up thông tin sản phẩm lên firebase
                             uploadSanPhamtoFirebase(uriImage, tensp, mota, Integer.parseInt(giasp), Integer.parseInt(idSp), name_thuonghieu);
 
                         }
@@ -153,10 +163,11 @@ public class FragmentSanPham extends Fragment {
                 });
             }
         });
+
         return view;
-
-
     }
+
+
 
     private void setAdapterSpinner() {
 
@@ -183,9 +194,8 @@ public class FragmentSanPham extends Fragment {
         });
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, listSpiner);
-//        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(arrayAdapter);
-//        arrayAdapter.notifyDataSetChanged();
+
     }
 
     private void setAdapterQLsanpham() {
@@ -213,6 +223,8 @@ public class FragmentSanPham extends Fragment {
                     }
                 }
                 qlSanPhamAdapter.notifyDataSetChanged();
+
+
             }
 
             @Override

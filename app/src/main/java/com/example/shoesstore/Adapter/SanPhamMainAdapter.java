@@ -1,9 +1,9 @@
 package com.example.shoesstore.Adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,20 +11,24 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.shoesstore.Fragment.FragmentHome;
 import com.example.shoesstore.Moder.SanPhamMain;
 import com.example.shoesstore.R;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SanPhamMainAdapter extends RecyclerView.Adapter<SanPhamMainAdapter.SanPhamMainViewHoder> {
-    private Context context;
+    private FragmentHome context;
     private List<SanPhamMain> mSanPhamMain;
+    private List<SanPhamMain> mSanPhamMainSearch; // list trung gian để tìm kiếm
 
-    public SanPhamMainAdapter(Context context, List<SanPhamMain> mSanPhamMain) {
+    public SanPhamMainAdapter(FragmentHome context, List<SanPhamMain> mSanPhamMain) {
         this.context = context;
         this.mSanPhamMain = mSanPhamMain;
+        this.mSanPhamMainSearch = mSanPhamMain;
     }
 
     @NonNull
@@ -42,7 +46,7 @@ public class SanPhamMainAdapter extends RecyclerView.Adapter<SanPhamMainAdapter.
             return;
         }
         holder.tvName.setText(sanPhamMain.getName());
-        holder.tvGia.setText(String.valueOf(sanPhamMain.getGia()));
+        holder.tvGia.setText(sanPhamMain.getGia() + " $");
         //sử dụng thư viện Glide để set hình từ url
         Glide.with(context).load(mSanPhamMain.get(position).getURLImage()).into(holder.iv_sanpham1);
         holder.tvThuongHieu.setText(sanPhamMain.getThuonghieu());
@@ -55,6 +59,39 @@ public class SanPhamMainAdapter extends RecyclerView.Adapter<SanPhamMainAdapter.
             return mSanPhamMain.size();
         }
         return 0;
+    }
+
+    // getFilter để tìm kiếm
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String Search = charSequence.toString();
+                if (Search.isEmpty()) {
+                    mSanPhamMain = mSanPhamMainSearch;
+                } else {
+                    List<SanPhamMain> list = new ArrayList<>();
+                    for (SanPhamMain sanPham : mSanPhamMainSearch) {
+                        if (sanPham.getName().toLowerCase().contains(Search.toLowerCase())
+                                || (sanPham.getThuonghieu().toLowerCase()).contains(Search.toLowerCase())
+                                || String.valueOf(sanPham.getGia()).toLowerCase().contains(Search.toLowerCase())
+                                || sanPham.getMota().toLowerCase().contains(Search.toLowerCase())) {
+                            list.add(sanPham);
+                        }
+                    }
+                    mSanPhamMain = list;
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = mSanPhamMain;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                mSanPhamMain = (List<SanPhamMain>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 
     public class SanPhamMainViewHoder extends RecyclerView.ViewHolder {
