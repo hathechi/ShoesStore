@@ -168,7 +168,6 @@ public class FragmentSanPham extends Fragment {
     }
 
 
-
     private void setAdapterSpinner() {
 
 
@@ -317,6 +316,19 @@ public class FragmentSanPham extends Fragment {
         ten_edit.setText(sanPhamMain.getName());
         gia_edit.setText(sanPhamMain.getGia() + "");
         mota_edit.setText(sanPhamMain.getMota());
+        spinner.setSelection(listSpiner.indexOf(sanPhamMain.getThuonghieu()));
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                name_thuonghieu = spinner.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
         Glide.with(getContext()).load(sanPhamMain.getURLImage()).into(iv_view);
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -325,20 +337,9 @@ public class FragmentSanPham extends Fragment {
                 String gia = (gia_edit.getText().toString().trim());
                 String mota = mota_edit.getText().toString().trim();
 
-                spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                        name_thuonghieu = spinner.getSelectedItem().toString();
-                    }
 
-                    @Override
-                    public void onNothingSelected(AdapterView<?> adapterView) {
-
-                    }
-                });
-
-                if (ten.isEmpty() || gia.isEmpty() || mota.isEmpty() || name_thuonghieu == null) {
-                    Toast.makeText(getContext(), "NHẬP ĐỦ DỮ LIỆU", Toast.LENGTH_SHORT).show();
+                if (ten.isEmpty() || gia.isEmpty() || mota.isEmpty() || name_thuonghieu == null || uriImage == null) {
+                    FancyToast.makeText(getContext(), "NHẬP ĐỦ DỮ LIỆU", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
                 } else {
 
                     updateImage(sanPhamMain, ten, gia, mota, name_thuonghieu);
@@ -353,9 +354,14 @@ public class FragmentSanPham extends Fragment {
         FirebaseStorage storage = FirebaseStorage.getInstance("gs://realtimedata-1e0aa.appspot.com");
         StorageReference storageRef = storage.getReference();
         StorageReference mountainImagesRef = storageRef.child(System.currentTimeMillis() + ".PNG");
-//Tạo dialog delay
+        //Tạo dialog delay
         ProgressDialog progressDialog = ProgressDialog.show(getContext(), "Chờ Chút", "Sửa Thông Tin Xong ngay đây !!", true);
 
+//        //check hình khi chỉnh sửa
+//        if (uriImage == null) {
+//            uriImage = Uri.parse(sanPhamMain.getURLImage());
+//            Log.i("a", "updateImage: " + uriImage);
+//        }
         mountainImagesRef.putFile(uriImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -378,7 +384,8 @@ public class FragmentSanPham extends Fragment {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull @NotNull Exception e) {
-                Toast.makeText(getContext(), "Fail", Toast.LENGTH_SHORT).show();
+                FancyToast.makeText(getContext(), "Lỗi Kết Nối !!!", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
+                progressDialog.dismiss();
             }
         });
 

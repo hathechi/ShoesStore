@@ -1,5 +1,7 @@
 package com.example.shoesstore.Adapter;
 
+import android.annotation.SuppressLint;
+import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,11 +26,13 @@ public class SanPhamMainAdapter extends RecyclerView.Adapter<SanPhamMainAdapter.
     private FragmentHome context;
     private List<SanPhamMain> mSanPhamMain;
     private List<SanPhamMain> mSanPhamMainSearch; // list trung gian để tìm kiếm
+    private IclickAddGioHang iclickAddGioHang;
 
-    public SanPhamMainAdapter(FragmentHome context, List<SanPhamMain> mSanPhamMain) {
+    public SanPhamMainAdapter(FragmentHome context, List<SanPhamMain> mSanPhamMain, IclickAddGioHang ivAddGioHang) {
         this.context = context;
         this.mSanPhamMain = mSanPhamMain;
         this.mSanPhamMainSearch = mSanPhamMain;
+        this.iclickAddGioHang = ivAddGioHang;
     }
 
     @NonNull
@@ -51,6 +55,15 @@ public class SanPhamMainAdapter extends RecyclerView.Adapter<SanPhamMainAdapter.
         Glide.with(context).load(mSanPhamMain.get(position).getURLImage()).into(holder.iv_sanpham1);
         holder.tvThuongHieu.setText(sanPhamMain.getThuonghieu());
         holder.tvMota.setText(sanPhamMain.getMota());
+        holder.ivAddGioHang.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("ResourceAsColor")
+            @Override
+            public void onClick(View view) {
+                iclickAddGioHang.onClickAdd(sanPhamMain);
+                holder.ivAddGioHang.setColorFilter(R.color.white);
+                holder.ivAddGioHang.setClickable(false);
+            }
+        });
     }
 
     @Override
@@ -94,9 +107,14 @@ public class SanPhamMainAdapter extends RecyclerView.Adapter<SanPhamMainAdapter.
         };
     }
 
+    public interface IclickAddGioHang {
+        void onClickAdd(SanPhamMain sanPhamMain);
+    }
+
     public class SanPhamMainViewHoder extends RecyclerView.ViewHolder {
         private ImageView iv_sanpham1;
         private TextView tvGia, tvName, tvThuongHieu, tvMota;
+        private ImageView ivAddGioHang;
 
         public SanPhamMainViewHoder(@NonNull @NotNull View itemView) {
             super(itemView);
@@ -105,6 +123,7 @@ public class SanPhamMainAdapter extends RecyclerView.Adapter<SanPhamMainAdapter.
             tvName = itemView.findViewById(R.id.tv_sanpham1_home);
             tvThuongHieu = itemView.findViewById(R.id.tv_thuonghieu1_home);
             tvMota = itemView.findViewById(R.id.tv_mota_home);
+            ivAddGioHang = itemView.findViewById(R.id.btnAddgiohang);
 
         }
     }

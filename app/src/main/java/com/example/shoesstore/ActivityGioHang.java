@@ -27,8 +27,8 @@ public class ActivityGioHang extends AppCompatActivity {
 
 
         ahBottomNavigation = findViewById(R.id.AHBottomNavigation);
-        AHBottomNavigationItem item1 = new AHBottomNavigationItem("Giỏ Hàng", R.drawable.ic_clear_black_24dp, R.color.purple_200);
-        AHBottomNavigationItem item2 = new AHBottomNavigationItem("Hóa Đơn", R.drawable.ic_check_black_24dp, R.color.purple_700);
+        AHBottomNavigationItem item1 = new AHBottomNavigationItem("Giỏ Hàng", R.drawable.ic_baseline_shopping_cart_24, R.color.white);
+        AHBottomNavigationItem item2 = new AHBottomNavigationItem("Hóa Đơn", R.drawable.ic_baseline_event_note_24, R.color.white);
 
         ahBottomNavigation.addItem(item1);
         ahBottomNavigation.addItem(item2);

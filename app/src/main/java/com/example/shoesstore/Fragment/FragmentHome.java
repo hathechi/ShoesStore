@@ -4,10 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.shoesstore.Adapter.SanPhamAdapter;
 import com.example.shoesstore.Adapter.SanPhamMainAdapter;
 import com.example.shoesstore.Adapter.ThuongHieuAdapter;
+import com.example.shoesstore.Moder.GioHang;
 import com.example.shoesstore.Moder.SanPham;
 import com.example.shoesstore.Moder.SanPhamMain;
 import com.example.shoesstore.Moder.ThuongHieu;
@@ -31,26 +30,23 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.shashank.sony.fancytoastlib.FancyToast;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FragmentHome#} factory method to
- * create an instance of this fragment.
- */
 public class FragmentHome extends Fragment {
+    public static List<GioHang> mGioHang = new ArrayList<>();
     private RecyclerView recyclerView, rcvThuongHieu, rcvSanPhamMain;
     private SanPhamAdapter sanPhamAdapter;
     private ThuongHieuAdapter thuongHieuAdapter;
     private SanPhamMainAdapter sanPhamMainAdapter;
     private List<SanPhamMain> sanPhamMains = new ArrayList<>();
-    private List<SanPhamMain> mSanPhamMains = new ArrayList<>(); // list trung gian
     private List<SanPham> sanPhams = new ArrayList<>();
     private List<ThuongHieu> thuonghieu = new ArrayList<>();
+    private SearchView searchView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -79,110 +75,33 @@ public class FragmentHome extends Fragment {
 
         AdapterSanPhamMain();
 
-
-        return view;
-    }
-
-    //menu Search
-
-
-    @Override
-    public void onCreateOptionsMenu(@NonNull @NotNull Menu menu, @NonNull @NotNull MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_search, menu);
-
-        MenuItem item = menu.findItem(R.id.id_search);
-        SearchView searchView = (SearchView) item.getActionView();
+        //Search view
+        searchView = view.findViewById(R.id.SearchView);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 sanPhamMainAdapter.getFilter().filter(query);
-//                searchItem(query);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
                 sanPhamMainAdapter.getFilter().filter(newText);
-//                searchItem(newText);
-                return false;
+                return true;
             }
         });
+
+        return view;
+    }
+
+    //menu toolbar
+    @Override
+    public void onCreateOptionsMenu(@NonNull @NotNull Menu menu, @NonNull @NotNull MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_search, menu);
         super.onCreateOptionsMenu(menu, inflater);
 
     }
 
-    private void searchItem(String Search) {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("sanpham");
-        myRef.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
-                SanPhamMain sanPham = snapshot.getValue(SanPhamMain.class);
-                mSanPhamMains = sanPhamMains;
-                if (Search.isEmpty()) {
-                    sanPhamMains = mSanPhamMains;
-                } else {
-
-                        if (sanPham.getName().toLowerCase().contains(Search.toLowerCase())
-                                || (sanPham.getThuonghieu()).contains(Search.toLowerCase())
-                                || String.valueOf(sanPham.getGia()).toLowerCase().contains(Search.toLowerCase())
-                                || sanPham.getMota().toLowerCase().contains(Search.toLowerCase())) {
-                           sanPhamMains.add(sanPham);
-                        }
-
-//                    sanPhamMains = list;
-//                    List<SanPhamMain> list = new ArrayList<>();
-//                    for (SanPhamMain product : mSanPhamMains) {
-//                        if (product.getName().toLowerCase().contains(Search.toLowerCase())
-//                                || (product.getThuonghieu()).contains(Search.toLowerCase())
-//                                || String.valueOf(product.getGia()).toLowerCase().contains(Search.toLowerCase())
-//                                || product.getMota().toLowerCase().contains(Search.toLowerCase())) {
-//                            list.add(product);
-//                        }
-//                    }
-//                    sanPhamMains = list;
-                }
-
-//                if (sanPham.getThuonghieu().contains(query) || sanPham.getName().contains(query)) {
-//                    if (mSanPhamMains != null) {
-//                        sanPhamMains.clear();
-//                    }
-//                    sanPhamMains.add(sanPham);
-//                }
-                sanPhamMainAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onChildChanged(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull @NotNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-            }
-        });
-
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull @NotNull MenuItem item) {
-        if (item.getItemId() == R.id.id_search) {
-            Toast.makeText(getActivity(), "abc", Toast.LENGTH_SHORT).show();
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     private void AdapterSanPhamMain() {
 
@@ -220,7 +139,14 @@ public class FragmentHome extends Fragment {
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
         rcvSanPhamMain.setLayoutManager(gridLayoutManager);
-        sanPhamMainAdapter = new SanPhamMainAdapter(this, sanPhamMains);
+        sanPhamMainAdapter = new SanPhamMainAdapter(this, sanPhamMains, new SanPhamMainAdapter.IclickAddGioHang() {
+            @Override
+            public void onClickAdd(SanPhamMain sanPhamMain) {
+                mGioHang.add(new GioHang(sanPhamMain.getGia(), sanPhamMain.getName(), sanPhamMain.getThuonghieu(), sanPhamMain.getMota(), sanPhamMain.getURLImage()));
+                FancyToast.makeText(getContext(), "Thêm Vào Giỏ Hàng Thành Công !!", FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false).show();
+
+            }
+        });
         rcvSanPhamMain.setAdapter(sanPhamMainAdapter);
     }
 
