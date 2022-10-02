@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/br3">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="50dp">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="40dp"
+            android:gravity="center"
+            android:text="Join us for free!"
+            android:textColor="#FF6D00"
+            android:textSize="26dp"
+            android:textStyle="bold"
+            />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/text_input_user"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:textColorHint="@color/white"
+            app:hintTextAppearance="@style/TextInputLayoutHintText"
+            app:startIconDrawable="@drawable/icon_user"
+            app:startIconTint="@color/white">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etUsername"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:background="@drawable/botron_edittext"
+                android:ems="10"
+                android:hint="User Name"
+                android:inputType="textPersonName"
+                android:paddingLeft="30dp"
+                android:singleLine="true"
+                android:textColor="@color/white"
+                android:textColorHint="#FFFFFF"
+                app:backgroundTint="#FB9E58"
+
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/text_input_pass"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:textColorHint="@color/white"
+            app:hintAnimationEnabled="false"
+            app:hintTextAppearance="@style/TextInputLayoutHintText"
+            app:startIconDrawable="@drawable/icon_pass"
+            app:startIconTint="@color/white">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPass"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:background="@drawable/botron_edittext"
+                android:ems="10"
+                android:hint="Pass Word"
+                android:inputType="numberPassword"
+                android:paddingLeft="30dp"
+                android:singleLine="true"
+                android:textColor="@color/white"
+                android:textColorHint="#FFFFFF"
+                app:backgroundTint="#FB9E58"
+
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/text_input_CFpass"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:textColorHint="@color/white"
+            app:hintAnimationEnabled="false"
+            app:hintTextAppearance="@style/TextInputLayoutHintText"
+            app:startIconDrawable="@drawable/icon_pass"
+            app:startIconTint="@color/white">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etCFpass"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:background="@drawable/botron_edittext"
+                android:ems="10"
+                android:hint="Comfirm PassWord"
+                android:inputType="numberPassword"
+                android:paddingLeft="30dp"
+                android:singleLine="true"
+                android:textColor="@color/white"
+                android:textColorHint="#FFFFFF"
+                app:backgroundTint="#FB9E58"
+
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/text_input_email"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:textColorHint="@color/white"
+            app:hintAnimationEnabled="false"
+            app:hintTextAppearance="@style/TextInputLayoutHintText"
+            app:startIconDrawable="@drawable/icon_mail"
+            app:startIconTint="@color/white">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:background="@drawable/botron_edittext"
+                android:ems="10"
+                android:hint="Email"
+                android:inputType="textPersonName"
+                android:paddingLeft="30dp"
+                android:singleLine="true"
+                android:textColor="@color/white"
+                android:textColorHint="#FFFFFF"
+                app:backgroundTint="#FB9E58"
+
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/text_input_date"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:textColorHint="@color/white"
+                app:hintAnimationEnabled="false"
+                app:hintTextAppearance="@style/TextInputLayoutHintText"
+                app:startIconDrawable="@drawable/icon_date"
+                app:startIconTint="@color/white">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etNgaysinh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="50dp"
+
+                    android:background="@drawable/botron_edittext"
+                    android:ems="10"
+                    android:inputType="date"
+                    android:paddingLeft="30dp"
+                    android:singleLine="true"
+                    android:textColor="@color/white"
+                    android:textColorHint="#FFFFFF"
+                    android:hint="dd/mm/yyyy"
+                    app:backgroundTint="#FB9E58"
+
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/btnChonngay"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_marginRight="50dp"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/radius_button"
+                android:text="Choice"
+                android:backgroundTint="#00B8D4"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView19"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginBottom="5dp"
+            android:text="SEX"
+            android:textColor="#FF6D00" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginBottom="6dp"
+            android:background="@drawable/botron_edittext"
+            android:gravity="center"
+            android:backgroundTint="#FB9E58"
+            android:orientation="horizontal">
+
+
+            <RadioButton
+                android:id="@+id/rbNam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="#FFFFFF"
+                android:checked="true"
+                android:textColor="@color/white"
+                android:text="MALE" />
+
+            <RadioButton
+                android:id="@+id/rbNu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:textColor="@color/white"
+                android:buttonTint="#FFFFFF"
+                android:text="FEMALE" />
+
+
+        </RadioGroup>
+
+
+        <TextView
+            android:id="@+id/tvError_regis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="#FF0000" />
+
+        <CheckBox
+            android:id="@+id/checkbox_regis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="70dp"
+            android:layout_marginRight="70dp"
+            android:buttonTint="#FF6D00"
+            android:checked="false"
+            android:text="Agree to terms and services! "
+            android:textColor="#FF6D00">
+
+        </CheckBox>
+
+
+        <Button
+            android:id="@+id/btnRegister_regis"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="50dp"
+            android:background="@drawable/radius_button"
+            android:backgroundTint="#00BFA5"
+            android:gravity="center|center_horizontal"
+            android:text="SIGN UP"
+            android:textColor="#fff"
+            android:textSize="40px" />
+
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:text="HAVE ACCOUNT? LOG IN NOW "
+            android:textColor="#FF6D00"
+            android:textSize="14sp" />
+
+
+        <Button
+            android:id="@+id/btnLogin_regis"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+
+            android:background="@drawable/radius_button"
+            android:backgroundTint="@drawable/state_button"
+            android:gravity="center|center_horizontal"
+            android:text="LOGIN"
+            android:textColor="#fff"
+            android:textSize="40px" />
+
+
+    </LinearLayout>
+
+
+</ScrollView>
