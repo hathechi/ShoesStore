@@ -1,9 +1,11 @@
 package com.example.shoesstore.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -16,13 +18,16 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.shoesstore.ActivityGioHang;
 import com.example.shoesstore.Adapter.SanPhamAdapter;
 import com.example.shoesstore.Adapter.SanPhamMainAdapter;
 import com.example.shoesstore.Adapter.ThuongHieuAdapter;
+import com.example.shoesstore.LoginActivity;
 import com.example.shoesstore.Moder.GioHang;
 import com.example.shoesstore.Moder.SanPham;
 import com.example.shoesstore.Moder.SanPhamMain;
 import com.example.shoesstore.Moder.ThuongHieu;
+import com.example.shoesstore.MySharedPreferences;
 import com.example.shoesstore.R;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -94,10 +99,37 @@ public class FragmentHome extends Fragment {
         return view;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull @NotNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.id_menu_giohang:
+                MySharedPreferences sharedPreferences = new MySharedPreferences(getContext());
+                if (sharedPreferences.getBooleanValue("login")) {
+                    Intent intent = new Intent(getActivity(), ActivityGioHang.class);
+                    startActivity(intent);
+                } else {
+                    FancyToast.makeText(getActivity(), "Bạn Cần Phải Đăng Nhập Trước !", FancyToast.LENGTH_SHORT, FancyToast.WARNING, false).show();
+                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent);
+                    getActivity().finish();
+                }
+                break;
+            case R.id.id_menu_dangxuat:
+                MySharedPreferences mySharedPreferences = new MySharedPreferences(getContext());
+                mySharedPreferences.putBooleanValue("login", false);
+                Intent intent1 = new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent1);
+                getActivity().finish();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
     //menu toolbar
     @Override
     public void onCreateOptionsMenu(@NonNull @NotNull Menu menu, @NonNull @NotNull MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_search, menu);
+        inflater.inflate(R.menu.menu_home, menu);
         super.onCreateOptionsMenu(menu, inflater);
 
     }

@@ -1,7 +1,6 @@
 package com.example.shoesstore;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -9,15 +8,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.shoesstore.Moder.User;
-import com.google.android.material.snackbar.BaseTransientBottomBar;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
@@ -51,6 +47,8 @@ public class LoginActivity extends AppCompatActivity {
         text_input_user = findViewById(R.id.text_input_user);
         text_input_pass = findViewById(R.id.text_input_pass);
         btnLogin = findViewById(R.id.btnLogin);
+
+
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,15 +66,16 @@ public class LoginActivity extends AppCompatActivity {
 
         forgotpass.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this, ForgotPassword.class);
-//                startActivity(intent);
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+                startActivity(intent);
+
             }
         });
         //Check dữ liệu  ở dưới checkbox rồi setText lên user và pass
-        SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
-        String remember_username = preferences.getString("remember_username", "");
-        String remember_password = preferences.getString("remember_password", "");
+        MySharedPreferences mySharedPreferences = new MySharedPreferences(LoginActivity.this);
+        String remember_username = mySharedPreferences.getValue("remember_username");
+        String remember_password = mySharedPreferences.getValue("remember_password");
         Log.i("HTC", remember_username + " " + remember_password);
         if (remember_password != null && remember_username != null) {
             username.setText(remember_username);
@@ -144,24 +143,28 @@ public class LoginActivity extends AppCompatActivity {
                         if (getuser.getUsername().equalsIgnoreCase(user) && getuser.getPassword().equalsIgnoreCase(pass)) {
                             //remember login
                             if (checkBox.isChecked()) {
-                                SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
-                                SharedPreferences.Editor editor = preferences.edit();
-                                editor.putString("remember_username", getuser.getUsername());
-                                editor.putString("remember_password", getuser.getPassword());
-                                editor.apply();
-                                FancyToast.makeText(LoginActivity.this, "isChecked", FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show();
+                                MySharedPreferences mySharedPreferences = new MySharedPreferences(LoginActivity.this);
+                                mySharedPreferences.putValue("remember_username", getuser.getUsername());
+                                mySharedPreferences.putValue("remember_password", getuser.getPassword());
+//                                FancyToast.makeText(LoginActivity.this, "isChecked", FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show();
 
                             } else {
-                                SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
-                                SharedPreferences.Editor editor = preferences.edit();
-                                editor.putString("remember_username", "");
-                                editor.putString("remember_password", "");
-                                editor.apply();
-                                FancyToast.makeText(LoginActivity.this, "UnChecked", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
+                                MySharedPreferences mySharedPreferences = new MySharedPreferences(LoginActivity.this);
+                                mySharedPreferences.putValue("remember_username", null);
+                                mySharedPreferences.putValue("remember_password", null);
+//                                FancyToast.makeText(LoginActivity.this, "UnChecked", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
 
                             }
                             // CHuyển trang
+                            if (getuser.getUsername().equalsIgnoreCase("admin")) {
+                                final MySharedPreferences mySharedPreferences = new MySharedPreferences(LoginActivity.this);
+                                mySharedPreferences.putBooleanValue("permission_admin", true);
+                                mySharedPreferences.putBooleanValue("login", true);
+                            }
+
+
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            intent.putExtra("user", user);
                             startActivity(intent);
                             finish();
                             check = false;
@@ -188,8 +191,8 @@ public class LoginActivity extends AppCompatActivity {
                 }
             });
             if (check) {
-                text_input_user.setError("SAI TÀI KHOẢN HOẶC MẬT KHẨU !");
-                text_input_pass.setError("SAI TÀI KHOẢN HOẶC MẬT KHẨU !");
+                text_input_user.setError("SAI TÀI KHOẢN !");
+                text_input_pass.setError("SAI MẬT KHẨU !");
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {

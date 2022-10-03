@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:id="@+id/layout_enterpass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#00B8D4"
+        android:orientation="vertical"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp">
+
+        <TextView
+            android:id="@+id/tv_error_enterpass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginBottom="5dp"
+            android:text="Enter the password"
+            android:textColor="#FFFFFF" />
+
+        <EditText
+            android:id="@+id/etPass"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/botron_edittext"
+            android:hint=". . ."
+            android:inputType="numberPassword"
+            android:paddingLeft="30dp"
+            android:textColorHint="#000"
+            app:backgroundTint="#fff" />
+
+        <Button
+            android:id="@+id/btnResendpassword"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="50dp"
+            android:background="@drawable/radius_button"
+            android:backgroundTint="@drawable/state_button"
+            android:gravity="center|center_horizontal"
+            android:text="RESEND PASSWORD"
+            android:textColor="#fff"
+            android:textSize="40px" />
+
+        <Button
+            android:id="@+id/btnLogin_resetpass"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="50dp"
+            android:background="@drawable/radius_button"
+            android:backgroundTint="#FF6D00"
+            android:gravity="center|center_horizontal"
+            android:text="Login"
+            android:textColor="#fff"
+            android:textSize="40px" />
+
+    </LinearLayout>
+</LinearLayout>

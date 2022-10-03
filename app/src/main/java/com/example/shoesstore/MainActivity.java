@@ -3,8 +3,10 @@ package com.example.shoesstore;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -15,19 +17,20 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.shoesstore.DAO.ThuongHieuDAO;
 import com.example.shoesstore.Fragment.FragmentHome;
 import com.example.shoesstore.Fragment.FragmentSanPham;
 import com.example.shoesstore.Fragment.FragmentThuongHieu;
-import com.example.shoesstore.Moder.ThuongHieu;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.shashank.sony.fancytoastlib.FancyToast;
 
 import org.jetbrains.annotations.NotNull;
 
 public class MainActivity extends AppCompatActivity {
     private com.google.android.material.navigation.NavigationView navigationView;
     private DrawerLayout mDrawerLayout;
+    private TextView tv_header_nav;
+    private MySharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,13 +53,39 @@ public class MainActivity extends AppCompatActivity {
         mDrawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 
+        //Ánh xạ nav
         navigationView = findViewById(R.id.nav_view);
+        sharedPreferences = new MySharedPreferences(MainActivity.this);
+
+        //Ẩn hiện quyền quản lý khi là admin
+        if (sharedPreferences.getBooleanValue("permission_admin")) {
+            Menu nav_Menu = navigationView.getMenu();
+            nav_Menu.findItem(R.id.nav_QLsanpham).setVisible(true);
+            nav_Menu.findItem(R.id.nav_QLthuonghieu).setVisible(true);
+            sharedPreferences.putBooleanValue("permission_admin", false);
+        } else {
+            Menu nav_Menu = navigationView.getMenu();
+            nav_Menu.findItem(R.id.nav_QLsanpham).setVisible(false);
+            nav_Menu.findItem(R.id.nav_QLthuonghieu).setVisible(false);
+        }
+
+        View mView = navigationView.getHeaderView(0);
+        tv_header_nav = mView.findViewById(R.id.tv_header_nav);
+
+        //lấy user name đổ lên nav
+        Intent intent = getIntent();
+        String user = intent.getStringExtra("user");
+        if (user != null) {
+            tv_header_nav.setText("HELLO: " + user.toUpperCase());
+        }
+
+
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @SuppressLint("NonConstantResourceId")
             @Override
             public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
 
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.nav_home:
                         replaceFragment(new FragmentHome());
                         break;
@@ -77,16 +106,25 @@ public class MainActivity extends AppCompatActivity {
         //set Adapter recycerview
 
 
-
         //Floating Button
         FloatingActionButton floatingActionButton = findViewById(R.id.floating_action);
+
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,ActivityGioHang.class);
-                startActivity(intent);
+                if (sharedPreferences.getBooleanValue("login")) {
+                    Intent intent = new Intent(MainActivity.this, ActivityGioHang.class);
+                    startActivity(intent);
+                } else {
+                    FancyToast.makeText(MainActivity.this, "Bạn Cần Phải Đăng Nhập Trước !", FancyToast.LENGTH_SHORT, FancyToast.WARNING, false).show();
+                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+
             }
         });
+
     }
 
 

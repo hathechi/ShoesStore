@@ -22,14 +22,16 @@
             android:text="Join us for free!"
             android:textColor="#FF6D00"
             android:textSize="26dp"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/text_input_user"
             android:layout_width="match_parent"
             android:layout_height="100dp"
+            android:hint=" "
             android:textColorHint="@color/white"
+            app:counterEnabled="true"
+            app:counterMaxLength="20"
             app:hintTextAppearance="@style/TextInputLayoutHintText"
             app:startIconDrawable="@drawable/icon_user"
             app:startIconTint="@color/white">
@@ -57,7 +59,10 @@
             android:id="@+id/text_input_pass"
             android:layout_width="match_parent"
             android:layout_height="100dp"
+            android:hint=" "
             android:textColorHint="@color/white"
+            app:counterEnabled="true"
+            app:counterMaxLength="8"
             app:hintAnimationEnabled="false"
             app:hintTextAppearance="@style/TextInputLayoutHintText"
             app:startIconDrawable="@drawable/icon_pass"
@@ -86,7 +91,10 @@
             android:id="@+id/text_input_CFpass"
             android:layout_width="match_parent"
             android:layout_height="100dp"
+            android:hint=" "
             android:textColorHint="@color/white"
+            app:counterEnabled="true"
+            app:counterMaxLength="8"
             app:hintAnimationEnabled="false"
             app:hintTextAppearance="@style/TextInputLayoutHintText"
             app:startIconDrawable="@drawable/icon_pass"
@@ -115,7 +123,10 @@
             android:id="@+id/text_input_email"
             android:layout_width="match_parent"
             android:layout_height="100dp"
+            android:hint=" "
             android:textColorHint="@color/white"
+            app:counterEnabled="true"
+            app:counterMaxLength="50"
             app:hintAnimationEnabled="false"
             app:hintTextAppearance="@style/TextInputLayoutHintText"
             app:startIconDrawable="@drawable/icon_mail"
@@ -145,12 +156,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/text_input_date"
                 android:layout_width="wrap_content"
                 android:layout_height="100dp"
+                android:hint=" "
                 android:textColorHint="@color/white"
-                app:hintAnimationEnabled="false"
                 app:hintTextAppearance="@style/TextInputLayoutHintText"
                 app:startIconDrawable="@drawable/icon_date"
                 app:startIconTint="@color/white">
@@ -163,12 +175,12 @@
 
                     android:background="@drawable/botron_edittext"
                     android:ems="10"
+                    android:hint="dd/mm/yyyy"
                     android:inputType="date"
                     android:paddingLeft="30dp"
                     android:singleLine="true"
                     android:textColor="@color/white"
                     android:textColorHint="#FFFFFF"
-                    android:hint="dd/mm/yyyy"
                     app:backgroundTint="#FB9E58"
 
                     />
@@ -178,12 +190,12 @@
                 android:id="@+id/btnChonngay"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
-                android:layout_marginRight="50dp"
                 android:layout_marginLeft="5dp"
+                android:layout_marginRight="50dp"
                 android:layout_weight="1"
                 android:background="@drawable/radius_button"
-                android:text="Choice"
                 android:backgroundTint="#00B8D4"
+                android:text="Choice"
                 android:textColor="@color/white" />
 
         </LinearLayout>
@@ -204,8 +216,8 @@
             android:layout_marginRight="50dp"
             android:layout_marginBottom="6dp"
             android:background="@drawable/botron_edittext"
-            android:gravity="center"
             android:backgroundTint="#FB9E58"
+            android:gravity="center"
             android:orientation="horizontal">
 
 
@@ -215,8 +227,8 @@
                 android:layout_height="wrap_content"
                 android:buttonTint="#FFFFFF"
                 android:checked="true"
-                android:textColor="@color/white"
-                android:text="MALE" />
+                android:text="MALE"
+                android:textColor="@color/white" />
 
             <RadioButton
                 android:id="@+id/rbNu"
@@ -224,9 +236,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
-                android:textColor="@color/white"
                 android:buttonTint="#FFFFFF"
-                android:text="FEMALE" />
+                android:text="FEMALE"
+                android:textColor="@color/white" />
 
 
         </RadioGroup>
@@ -261,7 +273,7 @@
             android:layout_marginTop="30dp"
             android:layout_marginRight="50dp"
             android:background="@drawable/radius_button"
-            android:backgroundTint="#00BFA5"
+            android:backgroundTint="@drawable/state_button"
             android:gravity="center|center_horizontal"
             android:text="SIGN UP"
             android:textColor="#fff"
@@ -286,9 +298,8 @@
             android:layout_height="60dp"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
-
             android:background="@drawable/radius_button"
-            android:backgroundTint="@drawable/state_button"
+            android:backgroundTint="#00B8D4"
             android:gravity="center|center_horizontal"
             android:text="LOGIN"
             android:textColor="#fff"

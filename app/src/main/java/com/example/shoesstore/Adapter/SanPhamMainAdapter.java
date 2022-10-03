@@ -1,7 +1,6 @@
 package com.example.shoesstore.Adapter;
 
 import android.annotation.SuppressLint;
-import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,11 +9,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.shoesstore.Fragment.FragmentHome;
 import com.example.shoesstore.Moder.SanPhamMain;
+import com.example.shoesstore.MySharedPreferences;
 import com.example.shoesstore.R;
 
 import org.jetbrains.annotations.NotNull;
@@ -55,12 +56,21 @@ public class SanPhamMainAdapter extends RecyclerView.Adapter<SanPhamMainAdapter.
         Glide.with(context).load(mSanPhamMain.get(position).getURLImage()).into(holder.iv_sanpham1);
         holder.tvThuongHieu.setText(sanPhamMain.getThuonghieu());
         holder.tvMota.setText(sanPhamMain.getMota());
+
+        //Nếu đăng nhập thì hiện nút add giỏ hàng không thì ẩn
+        MySharedPreferences mySharedPreferences = new MySharedPreferences(context.getContext());
+        if (mySharedPreferences.getBooleanValue("login")) {
+            holder.ivAddGioHang.setVisibility(View.VISIBLE);
+        } else {
+            holder.ivAddGioHang.setVisibility(View.INVISIBLE);
+        }
         holder.ivAddGioHang.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View view) {
                 iclickAddGioHang.onClickAdd(sanPhamMain);
-                holder.ivAddGioHang.setColorFilter(R.color.white);
+                //Dùng ContextCompat.getColor(context.getContext(), R.color.pig) để set màu cho imageView
+                holder.ivAddGioHang.setColorFilter(ContextCompat.getColor(context.getContext(), R.color.pig));
                 holder.ivAddGioHang.setClickable(false);
             }
         });

@@ -79,23 +79,15 @@
                     android:textSize="18dp" />
             </androidx.cardview.widget.CardView>
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <ImageView
+                android:id="@+id/btnAddgiohang"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_gravity="end"
-
                 android:layout_marginTop="250dp"
                 android:layout_marginRight="10dp"
-                app:cardCornerRadius="50dp">
+                android:src="@drawable/ic_baseline_favorite_24" />
 
-
-                <ImageView
-                    android:id="@+id/btnAddgiohang"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="#FFD5B6"
-                    android:src="@drawable/ic_baseline_shopping_cart_24" />
-            </androidx.cardview.widget.CardView>
         </androidx.cardview.widget.CardView>
 
 

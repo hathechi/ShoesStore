@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -34,6 +35,7 @@ public class RegisterActivity extends AppCompatActivity {
     private TextInputEditText User, Pass, CFpass, Email, Ngaysinh;
     private Handler handler = new Handler();
     private CheckBox checkbox_regis;
+    private int userID = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,16 +111,51 @@ public class RegisterActivity extends AppCompatActivity {
                     if (snapshot.exists()) {
                         FancyToast.makeText(getBaseContext(), "Tên Tài Khoản Đã Tồn Tại!!", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
                     } else {
+                        //check trùng email
+                        myRef.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                                if (snapshot.exists()) {
+                                    FancyToast.makeText(getBaseContext(), "Email Đã Tồn Tại!!", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
+                                } else {
+                                    //Lấy id cuối cùng rồi +1
+                                    myRef.orderByChild("id").limitToLast(1).addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                                            for (DataSnapshot a : snapshot.getChildren()) {
+                                                User iduser = a.getValue(User.class);
+                                                Log.i("id", "onDataChange: " + iduser.getId());
+                                                userID = iduser.getId();
 
-                        User user = new User(username, pass, email);
-                        UserDAO userDAO = new UserDAO();
-                        userDAO.insertUser(user);
-                        FancyToast.makeText(RegisterActivity.this,
-                                "ĐĂNG KÍ THÀNH CÔNG !",
-                                FancyToast.LENGTH_LONG,
-                                FancyToast.SUCCESS,
-                                false).show();
+                                            }
+                                        }
 
+                                        @Override
+                                        public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                                        }
+                                    });
+
+
+                                    //Gửi data lên firebase
+                                    User user = new User(userID + 1, username, pass, email);
+                                    UserDAO userDAO = new UserDAO();
+                                    userDAO.insertUser(user);
+                                    FancyToast.makeText(RegisterActivity.this,
+                                            "ĐĂNG KÍ THÀNH CÔNG !",
+                                            FancyToast.LENGTH_LONG,
+                                            FancyToast.SUCCESS,
+                                            false).show();
+                                }
+//
+                            }
+
+
+                            @Override
+                            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                            }
+                        });
                     }
                 }
 
@@ -129,6 +166,7 @@ public class RegisterActivity extends AppCompatActivity {
             });
 
         }
+
     }
 
     private void Init() {
