@@ -8,7 +8,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.shoesstore.Fragment.FragmentThuongHieu;
 import com.example.shoesstore.Moder.ThuongHieu;
 import com.example.shoesstore.R;
 
@@ -17,8 +16,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class ThuongHieuSwipeAdapter extends RecyclerView.Adapter<ThuongHieuSwipeAdapter.ThuongHieuViewHoder> {
-    private List<ThuongHieu> mThuongHieu;
-    private IclickListenerThuonghieu mIclickListener;
+    private final List<ThuongHieu> mThuongHieu;
+    private final IclickListenerThuonghieu mIclickListener;
 
     public ThuongHieuSwipeAdapter(List<ThuongHieu> mThuongHieu, IclickListenerThuonghieu mIclickListener) {
         this.mThuongHieu = mThuongHieu;
@@ -74,8 +73,9 @@ public class ThuongHieuSwipeAdapter extends RecyclerView.Adapter<ThuongHieuSwipe
 
     public class ThuongHieuViewHoder extends RecyclerView.ViewHolder {
 
-        private TextView tv_thuonghieu_home;
-        private TextView btnTVsua, btnTVxoa;
+        private final TextView tv_thuonghieu_home;
+        private final TextView btnTVsua;
+        private final TextView btnTVxoa;
 
         public ThuongHieuViewHoder(@NonNull @NotNull View itemView) {
             super(itemView);

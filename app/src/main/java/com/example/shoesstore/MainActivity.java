@@ -20,6 +20,8 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.shoesstore.Fragment.FragmentHome;
 import com.example.shoesstore.Fragment.FragmentSanPham;
 import com.example.shoesstore.Fragment.FragmentThuongHieu;
+import com.example.shoesstore.Fragment.MapsFragment;
+import com.example.shoesstore.SharedPreferences.MySharedPreferences;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.shashank.sony.fancytoastlib.FancyToast;
@@ -55,28 +57,38 @@ public class MainActivity extends AppCompatActivity {
 
         //Ánh xạ nav
         navigationView = findViewById(R.id.nav_view);
-        sharedPreferences = new MySharedPreferences(MainActivity.this);
-
-        //Ẩn hiện quyền quản lý khi là admin
-        if (sharedPreferences.getBooleanValue("permission_admin")) {
-            Menu nav_Menu = navigationView.getMenu();
-            nav_Menu.findItem(R.id.nav_QLsanpham).setVisible(true);
-            nav_Menu.findItem(R.id.nav_QLthuonghieu).setVisible(true);
-            sharedPreferences.putBooleanValue("permission_admin", false);
-        } else {
-            Menu nav_Menu = navigationView.getMenu();
-            nav_Menu.findItem(R.id.nav_QLsanpham).setVisible(false);
-            nav_Menu.findItem(R.id.nav_QLthuonghieu).setVisible(false);
-        }
-
         View mView = navigationView.getHeaderView(0);
         tv_header_nav = mView.findViewById(R.id.tv_header_nav);
 
+        sharedPreferences = new MySharedPreferences(MainActivity.this);
+
+        //Ẩn hiện quyền quản lý khi là admin
+        Menu nav_Menu = navigationView.getMenu();
+        if (sharedPreferences.getBooleanValue("permission_admin")) {
+
+            nav_Menu.findItem(R.id.nav_QLsanpham).setVisible(true);
+            nav_Menu.findItem(R.id.nav_QLthuonghieu).setVisible(true);
+
+        } else {
+            nav_Menu.findItem(R.id.nav_QLsanpham).setVisible(false);
+            nav_Menu.findItem(R.id.nav_QLthuonghieu).setVisible(false);
+        }
+        //Ẩn hiện menu login, logout
+        if (!sharedPreferences.getBooleanValue("login")) {
+            nav_Menu.findItem(R.id.nav_login).setVisible(true);
+            nav_Menu.findItem(R.id.nav_logout).setVisible(false);
+        } else {
+            nav_Menu.findItem(R.id.nav_login).setVisible(false);
+            nav_Menu.findItem(R.id.nav_logout).setVisible(true);
+        }
+
+
         //lấy user name đổ lên nav
-        Intent intent = getIntent();
-        String user = intent.getStringExtra("user");
-        if (user != null) {
-            tv_header_nav.setText("HELLO: " + user.toUpperCase());
+        String user = sharedPreferences.getValue("remember_username");
+        if (user != null && sharedPreferences.getBooleanValue("login") == true) {
+            tv_header_nav.setText("Hi: " + user.toUpperCase());
+        } else {
+            tv_header_nav.setText(null);
         }
 
 
@@ -95,6 +107,21 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.nav_QLthuonghieu:
                         replaceFragment(new FragmentThuongHieu());
                         break;
+                    case R.id.nav_login:
+                        Intent intent = new Intent(getBaseContext(), LoginActivity.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.nav_logout:
+                        MySharedPreferences mySharedPreferences = new MySharedPreferences(getApplicationContext());
+                        mySharedPreferences.putBooleanValue("login", false);
+                        mySharedPreferences.putBooleanValue("permission_admin", false);
+                        Intent intent1 = new Intent(getBaseContext(), LoginActivity.class);
+                        startActivity(intent1);
+                        finish();
+                        break;
+                    case R.id.nav_maps:
+                        replaceFragment(new MapsFragment());
+                        break;
 
                 }
 
@@ -102,8 +129,6 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-
-        //set Adapter recycerview
 
 
         //Floating Button

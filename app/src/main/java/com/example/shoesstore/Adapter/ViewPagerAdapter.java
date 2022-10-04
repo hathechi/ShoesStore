@@ -19,7 +19,7 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
     @NotNull
     @Override
     public Fragment createFragment(int position) {
-        switch (position){
+        switch (position) {
             case 0:
                 return new FragmentGioHang();
             case 1:

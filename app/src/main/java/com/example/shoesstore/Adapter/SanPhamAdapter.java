@@ -19,8 +19,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.SanPhamViewHoder> {
-    private List<SanPham> mSanPham;
-    private Context context;
+    private final List<SanPham> mSanPham;
+    private final Context context;
 
     public SanPhamAdapter(List<SanPham> mSanPham, Context context) {
         this.mSanPham = mSanPham;
@@ -56,8 +56,8 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.SanPhamV
     }
 
     public class SanPhamViewHoder extends RecyclerView.ViewHolder {
-        private ImageView iv_sanpham_home;
-        private TextView tv_sanpham_home;
+        private final ImageView iv_sanpham_home;
+        private final TextView tv_sanpham_home;
 
         public SanPhamViewHoder(@NonNull @NotNull View itemView) {
             super(itemView);

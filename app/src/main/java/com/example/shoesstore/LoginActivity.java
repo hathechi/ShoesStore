@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.shoesstore.Moder.User;
+import com.example.shoesstore.SharedPreferences.MySharedPreferences;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
@@ -33,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     boolean check = true;
     private TextInputLayout text_input_user, text_input_pass;
     private Button btnLogin, btnSignup;
-
+    final MySharedPreferences mySharedPreferences = new MySharedPreferences(LoginActivity.this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -157,14 +158,12 @@ public class LoginActivity extends AppCompatActivity {
                             }
                             // CHuyển trang
                             if (getuser.getUsername().equalsIgnoreCase("admin")) {
-                                final MySharedPreferences mySharedPreferences = new MySharedPreferences(LoginActivity.this);
                                 mySharedPreferences.putBooleanValue("permission_admin", true);
-                                mySharedPreferences.putBooleanValue("login", true);
                             }
 
-
+                            mySharedPreferences.putBooleanValue("login", true);
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            intent.putExtra("user", user);
+//                            intent.putExtra("user", user);
                             startActivity(intent);
                             finish();
                             check = false;

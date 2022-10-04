@@ -41,7 +41,7 @@ import java.util.List;
 public class FragmentThuongHieu extends Fragment {
     private RecyclerView rcvEditThuongHieu;
     private ThuongHieuSwipeAdapter thuongHieuSwipeAdapter;
-    private List<ThuongHieu> mThuongHieuList = new ArrayList<>();
+    private final List<ThuongHieu> mThuongHieuList = new ArrayList<>();
     private int id = 0;
 
     @Override

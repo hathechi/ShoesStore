@@ -44,8 +44,7 @@
             android:ems="10"
             android:hint="Giá"
             android:inputType="number"
-            android:paddingLeft="30dp"
-             />
+            android:paddingLeft="30dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -59,8 +58,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
-                android:layout_weight="1"
-                />
+                android:layout_weight="1" />
 
 
         </LinearLayout>
@@ -77,15 +75,18 @@
             android:hint="Mô Tả"
             android:paddingLeft="30dp" />
 
-
-        <Button
-            android:id="@+id/btnChonhinh"
+        <EditText
+            android:id="@+id/etChitiet"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
 
-            android:layout_weight="1"
+            android:layout_height="60dp"
+            android:layout_marginBottom="20dp"
+
             android:background="@drawable/botron_edittext"
-            android:text="Chọn Hình" />
+            android:ems="10"
+            android:hint="Chi Tiết"
+            android:paddingLeft="30dp" />
+
 
         <ImageView
             android:id="@+id/iv_view"

@@ -1,4 +1,4 @@
-package com.example.shoesstore;
+package com.example.shoesstore.SharedPreferences;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 public class MySharedPreferences {
     private static final String MY_PREFERENCES = "MY_PREFERENCES";
     private static final String MY_PREFERENCES_BOOLEAN = "MY_PREFERENCES_BOOLEAN";
-    private Context mContext;
+    private final Context mContext;
 
     public MySharedPreferences(Context mContext) {
         this.mContext = mContext;

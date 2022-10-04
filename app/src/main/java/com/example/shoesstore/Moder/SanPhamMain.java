@@ -1,7 +1,5 @@
 package com.example.shoesstore.Moder;
 
-import android.net.Uri;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,17 +9,20 @@ public class SanPhamMain {
     private String name;
     private String thuonghieu;
     private String mota;
+    private String chitiet;
     private String URLImage;
 
     public SanPhamMain() {
     }
 
-    public SanPhamMain(int id_sanpham1, int gia, String name, String thuonghieu, String mota, String URLImage) {
+
+    public SanPhamMain(int id_sanpham1, int gia, String name, String thuonghieu, String mota, String chitiet, String URLImage) {
         this.id_sanpham1 = id_sanpham1;
         this.gia = gia;
         this.name = name;
         this.thuonghieu = thuonghieu;
         this.mota = mota;
+        this.chitiet = chitiet;
         this.URLImage = URLImage;
     }
 
@@ -73,12 +74,21 @@ public class SanPhamMain {
         this.URLImage = URLImage;
     }
 
+    public String getChitiet() {
+        return chitiet;
+    }
+
+    public void setChitiet(String chitiet) {
+        this.chitiet = chitiet;
+    }
+
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
         result.put("gia", gia);
         result.put("name", name);
         result.put("thuonghieu", thuonghieu);
         result.put("mota", mota);
+        result.put("chitiet", chitiet);
         result.put("urlimage", URLImage);
 
 

@@ -33,7 +33,7 @@ public class RegisterActivity extends AppCompatActivity {
     private Button btnRegis, btnLogin_regis, btnChoice_date;
     private TextInputLayout text_input_user, text_input_pass, text_input_cfpass, text_input_email, text_input_date;
     private TextInputEditText User, Pass, CFpass, Email, Ngaysinh;
-    private Handler handler = new Handler();
+    private final Handler handler = new Handler();
     private CheckBox checkbox_regis;
     private int userID = 0;
 
@@ -262,7 +262,7 @@ public class RegisterActivity extends AppCompatActivity {
             }, 4000);
             return false;
         }
-        String checkDate[] = ngaysinh.split("/");
+        String[] checkDate = ngaysinh.split("/");
         if (Integer.parseInt(checkDate[checkDate.length - 1]) > 2007) {
             text_input_date.setError("TUỔI PHẢI LỚN HƠN 16!");
             handler.postDelayed(new Runnable() {

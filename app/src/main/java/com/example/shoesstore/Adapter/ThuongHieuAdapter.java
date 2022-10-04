@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class ThuongHieuAdapter extends RecyclerView.Adapter<ThuongHieuAdapter.ThuongHieuViewHoder> {
-    private List<ThuongHieu> mThuongHieu;
+    private final List<ThuongHieu> mThuongHieu;
 
     public ThuongHieuAdapter(List<ThuongHieu> mThuongHieu) {
         this.mThuongHieu = mThuongHieu;
@@ -50,7 +50,7 @@ public class ThuongHieuAdapter extends RecyclerView.Adapter<ThuongHieuAdapter.Th
 
     public class ThuongHieuViewHoder extends RecyclerView.ViewHolder {
 
-        private TextView tv_thuonghieu_home;
+        private final TextView tv_thuonghieu_home;
 
         public ThuongHieuViewHoder(@NonNull @NotNull View itemView) {
             super(itemView);

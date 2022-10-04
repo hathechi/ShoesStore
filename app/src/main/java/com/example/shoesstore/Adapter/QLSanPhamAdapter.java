@@ -19,9 +19,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class QLSanPhamAdapter extends RecyclerView.Adapter<QLSanPhamAdapter.SanPhamMainViewHoder> {
-    private Context context;
-    private List<SanPhamMain> mSanPhamMain;
-    private IclickListener mIclickListener;
+    private final Context context;
+    private final List<SanPhamMain> mSanPhamMain;
+    private final IclickListener mIclickListener;
 
     public QLSanPhamAdapter(Context context, List<SanPhamMain> mSanPhamMain, IclickListener listener) {
         this.context = context;
@@ -81,9 +81,13 @@ public class QLSanPhamAdapter extends RecyclerView.Adapter<QLSanPhamAdapter.SanP
     }
 
     public class SanPhamMainViewHoder extends RecyclerView.ViewHolder {
-        private ImageView iv_sanpham1;
-        private TextView tvGia, tvName, tvThuongHieu, tvMota;
-        private TextView btnTVsua, btnTVxoa;
+        private final ImageView iv_sanpham1;
+        private final TextView tvGia;
+        private final TextView tvName;
+        private final TextView tvThuongHieu;
+        private final TextView tvMota;
+        private final TextView btnTVsua;
+        private final TextView btnTVxoa;
 
         public SanPhamMainViewHoder(@NonNull @NotNull View itemView) {
             super(itemView);

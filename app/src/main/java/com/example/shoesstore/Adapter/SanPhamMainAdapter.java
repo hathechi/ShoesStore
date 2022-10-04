@@ -9,14 +9,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.shoesstore.Fragment.FragmentHome;
 import com.example.shoesstore.Moder.SanPhamMain;
-import com.example.shoesstore.MySharedPreferences;
 import com.example.shoesstore.R;
+import com.example.shoesstore.SharedPreferences.MySharedPreferences;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -24,10 +25,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SanPhamMainAdapter extends RecyclerView.Adapter<SanPhamMainAdapter.SanPhamMainViewHoder> {
-    private FragmentHome context;
+
+    private final FragmentHome context;
+    private final List<SanPhamMain> mSanPhamMainSearch; // list trung gian để tìm kiếm
+    private final IclickAddGioHang iclickAddGioHang;
     private List<SanPhamMain> mSanPhamMain;
-    private List<SanPhamMain> mSanPhamMainSearch; // list trung gian để tìm kiếm
-    private IclickAddGioHang iclickAddGioHang;
 
     public SanPhamMainAdapter(FragmentHome context, List<SanPhamMain> mSanPhamMain, IclickAddGioHang ivAddGioHang) {
         this.context = context;
@@ -64,14 +66,13 @@ public class SanPhamMainAdapter extends RecyclerView.Adapter<SanPhamMainAdapter.
         } else {
             holder.ivAddGioHang.setVisibility(View.INVISIBLE);
         }
-        holder.ivAddGioHang.setOnClickListener(new View.OnClickListener() {
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View view) {
                 iclickAddGioHang.onClickAdd(sanPhamMain);
                 //Dùng ContextCompat.getColor(context.getContext(), R.color.pig) để set màu cho imageView
                 holder.ivAddGioHang.setColorFilter(ContextCompat.getColor(context.getContext(), R.color.pig));
-                holder.ivAddGioHang.setClickable(false);
             }
         });
     }
@@ -122,9 +123,13 @@ public class SanPhamMainAdapter extends RecyclerView.Adapter<SanPhamMainAdapter.
     }
 
     public class SanPhamMainViewHoder extends RecyclerView.ViewHolder {
-        private ImageView iv_sanpham1;
-        private TextView tvGia, tvName, tvThuongHieu, tvMota;
-        private ImageView ivAddGioHang;
+        private final ImageView iv_sanpham1;
+        private final TextView tvGia;
+        private final TextView tvName;
+        private final TextView tvThuongHieu;
+        private final TextView tvMota;
+        private final ImageView ivAddGioHang;
+        private CardView cardView;
 
         public SanPhamMainViewHoder(@NonNull @NotNull View itemView) {
             super(itemView);
@@ -134,7 +139,7 @@ public class SanPhamMainAdapter extends RecyclerView.Adapter<SanPhamMainAdapter.
             tvThuongHieu = itemView.findViewById(R.id.tv_thuonghieu1_home);
             tvMota = itemView.findViewById(R.id.tv_mota_home);
             ivAddGioHang = itemView.findViewById(R.id.btnAddgiohang);
-
+            cardView = itemView.findViewById(R.id.layout_sanpham_main);
         }
     }
 }

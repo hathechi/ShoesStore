@@ -19,13 +19,12 @@ import com.example.shoesstore.R;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.GioHangViewHoder> {
-    private Context context;
-    private List<GioHang> mListGioHang;
-    private IclickListener mIclickListener;
+    private final Context context;
+    private final List<GioHang> mListGioHang;
+    private final IclickListener mIclickListener;
 
     public GioHangAdapter(Context context, List<GioHang> mListGioHang, IclickListener iclickListener) {
         this.context = context;
@@ -141,10 +140,15 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.GioHangV
     }
 
     public class GioHangViewHoder extends RecyclerView.ViewHolder {
-        private ImageView iv_sanpham1;
-        private TextView tvGia, tvName, tvThuongHieu, tvMota, tvSoLuong;
-        private TextView btnTVxoa;
-        private ImageView iv_tangsoluong, iv_giamsoluong;
+        private final ImageView iv_sanpham1;
+        private final TextView tvGia;
+        private final TextView tvName;
+        private final TextView tvThuongHieu;
+        private final TextView tvMota;
+        private final TextView tvSoLuong;
+        private final TextView btnTVxoa;
+        private final ImageView iv_tangsoluong;
+        private final ImageView iv_giamsoluong;
 
         public GioHangViewHoder(@NonNull @NotNull View itemView) {
             super(itemView);

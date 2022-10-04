@@ -9,24 +9,47 @@
             android:title="Trang Chủ" />
         <item
             android:id="@+id/nav_QLsanpham"
-            android:icon="@drawable/icon_home"
+            android:icon="@drawable/icon_quanly"
             android:title="Quản Lý Sản Phẩm" />
         <item
             android:id="@+id/nav_QLthuonghieu"
-            android:icon="@drawable/icon_home"
+            android:icon="@drawable/icon_quanly"
             android:title="Quản Lý Thương Hiệu" />
     </group>
+    <item android:title="Cá Nhân">
+        <menu>
+
+            <item
+                android:id="@+id/nav_login"
+                android:icon="@drawable/icon_login"
+                android:title="Đăng Nhập" />
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/icon_logout"
+                android:title="Đăng Xuất" />
+        </menu>
+    </item>
+    <item android:title="Bản Đồ">
+        <menu>
+
+            <item
+                android:id="@+id/nav_maps"
+                android:icon="@drawable/ic_baseline_map_24"
+                android:title="Xem Vị Trí" />
+
+        </menu>
+    </item>
     <item android:title="Chia Sẻ">
         <menu>
+
             <item
-                android:id="@+id/nav_home1"
-                android:icon="@drawable/icon_home"
-                android:title="Youtube"
-                />
+                android:id="@+id/nav_fb"
+                android:icon="@drawable/icon_share"
+                android:title="Facebook" />
             <item
-                android:id="@+id/nav_SanPham1"
-                android:icon="@drawable/icon_home"
-                android:title="Telegram" />
+                android:id="@+id/nav_youtube"
+                android:icon="@drawable/icon_share"
+                android:title="Youtube" />
         </menu>
     </item>
 </menu>

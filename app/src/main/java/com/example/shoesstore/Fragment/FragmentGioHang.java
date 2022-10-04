@@ -1,7 +1,6 @@
 package com.example.shoesstore.Fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,7 +59,8 @@ public class FragmentGioHang extends Fragment {
         });
         rcvGioHang.setAdapter(gioHangAdapter);
     }
-// hàm cộng tổng tiền rồi đưa lên màn hình
+
+    // hàm cộng tổng tiền rồi đưa lên màn hình
     public static void getSoLuongGioHang() {
         long tongtien = 0;
         for (int i = 0; i < mlistGioHang.size(); i++) {
