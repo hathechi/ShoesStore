@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -31,6 +32,7 @@ import com.example.shoesstore.Adapter.SanPhamMainAdapter;
 import com.example.shoesstore.Adapter.ThuongHieuAdapter;
 import com.example.shoesstore.LoginActivity;
 import com.example.shoesstore.Moder.GioHang;
+import com.example.shoesstore.Moder.HoaDon;
 import com.example.shoesstore.Moder.SanPham;
 import com.example.shoesstore.Moder.SanPhamMain;
 import com.example.shoesstore.Moder.ThuongHieu;
@@ -53,6 +55,8 @@ import java.util.TimerTask;
 
 public class FragmentHome extends Fragment {
     public static List<GioHang> mGioHang = new ArrayList<>();
+    public static List<HoaDon> mListhoadon = new ArrayList<>();
+    public static List<GioHang> mGioHangtoFirebase = new ArrayList<>();
     private final List<SanPhamMain> sanPhamMains = new ArrayList<>();
     private final List<SanPham> sanPhams = new ArrayList<>();
     private final List<ThuongHieu> thuonghieu = new ArrayList<>();
@@ -77,8 +81,12 @@ public class FragmentHome extends Fragment {
         //set Title cho toolbar
         MySharedPreferences mySharedPreferences = new MySharedPreferences(getContext());
         String user = mySharedPreferences.getValue("remember_username");
+
+
+        getDataGioHangFirebase(user);   //Lấy dữ liệu giỏ hàng của từng user từ firebase
+
         if (mySharedPreferences.getBooleanValue("login") && user != null) {
-            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Hi "+user.toUpperCase());
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(" Hi  " + user.toUpperCase());
             ((AppCompatActivity) getActivity()).getSupportActionBar().setIcon(R.drawable.ic_baseline_favorite_24);
         } else {
             ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("");
@@ -116,6 +124,7 @@ public class FragmentHome extends Fragment {
         return view;
     }
 
+
     @Override
     public boolean onOptionsItemSelected(@NonNull @NotNull MenuItem item) {
         switch (item.getItemId()) {
@@ -135,6 +144,10 @@ public class FragmentHome extends Fragment {
                 MySharedPreferences mySharedPreferences = new MySharedPreferences(getContext());
                 mySharedPreferences.putBooleanValue("login", false);
                 mySharedPreferences.putBooleanValue("permission_admin", false);
+                //Xóa List giỏ hàng cũ khi người dùng đăng xuất.
+                if (mGioHang != null) {
+                    mGioHang.clear();
+                }
                 Intent intent1 = new Intent(getActivity(), LoginActivity.class);
                 startActivity(intent1);
                 getActivity().finish();
@@ -228,8 +241,20 @@ public class FragmentHome extends Fragment {
                 btnAdd.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        mGioHang.add(new GioHang(sanPhamMain.getGia(), sanPhamMain.getName(), sanPhamMain.getThuonghieu(), sanPhamMain.getMota(), sanPhamMain.getURLImage()));
-                        FancyToast.makeText(getContext(), "Thêm Vào Giỏ Hàng Thành Công !!", FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false).show();
+                        FirebaseDatabase database = FirebaseDatabase.getInstance();
+                        DatabaseReference myRef = database.getReference("giohang");
+                        mGioHangtoFirebase.add(new GioHang(sanPhamMain.getGia(), sanPhamMain.getName(), sanPhamMain.getThuonghieu(), sanPhamMain.getMota(), sanPhamMain.getURLImage()));
+
+                        MySharedPreferences mySharedPreferences = new MySharedPreferences(getContext());
+                        String user = mySharedPreferences.getValue("remember_username");
+                        myRef.child(user).setValue(mGioHangtoFirebase, new DatabaseReference.CompletionListener() {
+                            @Override
+                            public void onComplete(@Nullable @org.jetbrains.annotations.Nullable DatabaseError error, @NonNull @NotNull DatabaseReference ref) {
+                                FancyToast.makeText(getContext(), "Thêm Vào Giỏ Hàng Thành Công !!", FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false).show();
+
+                            }
+                        });
+
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
@@ -243,8 +268,35 @@ public class FragmentHome extends Fragment {
 
 
             }
+
+
         });
         rcvSanPhamMain.setAdapter(sanPhamMainAdapter);
+    }
+
+    private void getDataGioHangFirebase(String user_name) {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("giohang");
+        if (user_name != null) {
+            myRef.child(user_name).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                    if (mGioHangtoFirebase != null) {
+                        mGioHangtoFirebase.clear();
+                    }
+                    for (DataSnapshot list : snapshot.getChildren()) {
+                        GioHang gioHang = list.getValue(GioHang.class);
+                        mGioHangtoFirebase.add(gioHang);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                }
+            });
+        }
+
     }
 
     private void AdapterThuongHieu() {

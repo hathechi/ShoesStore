@@ -18,6 +18,9 @@ public class GioHang {
         this.URLImage = URLImage;
     }
 
+    public GioHang() {
+    }
+
     public int getSlHienTai() {
         return slHienTai;
     }

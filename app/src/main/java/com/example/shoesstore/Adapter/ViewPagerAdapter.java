@@ -25,7 +25,7 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
             case 1:
                 return new FragmentHoaDon();
         }
-        return null;
+        return new FragmentGioHang();
     }
 
     @Override

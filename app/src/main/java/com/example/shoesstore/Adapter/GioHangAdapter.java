@@ -81,6 +81,7 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.GioHangV
                             .setPositiveButton("Có", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
+                                    mIclickListener.onClickDeleteItemFireBase(position);
                                     mListGioHang.remove(position);
                                     FragmentGioHang.getSoLuongGioHang();
                                     notifyDataSetChanged();
@@ -111,6 +112,7 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.GioHangV
                         .setPositiveButton("Có", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
+                                mIclickListener.onClickDeleteItemFireBase(position);
                                 mListGioHang.remove(position);
                                 FragmentGioHang.getSoLuongGioHang();
                                 notifyDataSetChanged();
@@ -135,7 +137,7 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.GioHangV
     // tạo interface để gọi sự kiện update ra bên ngoài
     public interface IclickListener {
         //        void onClickTinhTien(GioHang gioHang, int soluong);
-        void onClickTinhTien(int position);
+        void onClickDeleteItemFireBase(int position);
 
     }
 

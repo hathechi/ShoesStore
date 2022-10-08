@@ -87,16 +87,7 @@
                             android:textSize="14dp"
                             android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/tv_gia_home"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="left"
-                            android:text="Giá"
-                            android:textColor="#FF0202"
-                            android:textSize="20dp"
-                            android:textStyle="bold" />
+
                     </LinearLayout>
 
                     <TextView
@@ -123,6 +114,16 @@
                             android:text="Mô Tả"
                             android:textColor="@color/black"
                             android:textSize="14dp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/tv_gia_home"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="left"
+                            android:text="Giá"
+                            android:textColor="#FF0202"
+                            android:textSize="20dp"
                             android:textStyle="bold" />
 
                         <!--                <Button-->
