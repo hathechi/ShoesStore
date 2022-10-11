@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -66,6 +67,11 @@ public class SanPhamMainAdapter extends RecyclerView.Adapter<SanPhamMainAdapter.
         } else {
             holder.ivAddGioHang.setVisibility(View.INVISIBLE);
         }
+
+        holder.cardView.startAnimation(AnimationUtils.loadAnimation(
+                holder.itemView.getContext(),R.anim.animation_2));
+
+
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ResourceAsColor")
             @Override

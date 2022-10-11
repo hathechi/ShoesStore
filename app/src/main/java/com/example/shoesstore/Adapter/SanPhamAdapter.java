@@ -4,10 +4,12 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -44,6 +46,8 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.SanPhamV
         holder.tv_sanpham_home.setText(sanPham.getGia_sanpham() + " $");
         //sử dụng thư viện Glide để set hình từ url
         Glide.with(context).load(mSanPham.get(position).getImage_sanpham()).into(holder.iv_sanpham_home);
+
+        holder.cardview_sanpham.startAnimation(AnimationUtils.loadAnimation(holder.itemView.getContext(),R.anim.animation_1));
     }
 
     @Override
@@ -58,11 +62,13 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.SanPhamV
     public class SanPhamViewHoder extends RecyclerView.ViewHolder {
         private final ImageView iv_sanpham_home;
         private final TextView tv_sanpham_home;
+        private  CardView cardview_sanpham;
 
         public SanPhamViewHoder(@NonNull @NotNull View itemView) {
             super(itemView);
             iv_sanpham_home = itemView.findViewById(R.id.iv_sanpham_home);
             tv_sanpham_home = itemView.findViewById(R.id.tv_gia_sanpham_home);
+            cardview_sanpham = itemView.findViewById(R.id.cardview_sanpham);
         }
     }
 }

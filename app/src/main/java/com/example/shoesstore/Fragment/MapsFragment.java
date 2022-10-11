@@ -48,9 +48,9 @@ public class MapsFragment extends Fragment {
             }
             mMap.setMyLocationEnabled(true);
             mMap.getUiSettings().setZoomControlsEnabled(true);
-            LatLng hanoi = new LatLng(21.025703, 105.820570);
-            googleMap.addMarker(new MarkerOptions().position(hanoi).title("Marker in BMT"));
-            googleMap.moveCamera(CameraUpdateFactory.newLatLng(hanoi));
+            LatLng bmt = new LatLng(12.679519, 108.044521);
+            googleMap.addMarker(new MarkerOptions().position(bmt).title("Marker in BMT"));
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(bmt,14));
         }
     };
 

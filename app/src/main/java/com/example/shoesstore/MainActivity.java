@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.shoesstore.Fragment.FragmentHome;
+import com.example.shoesstore.Fragment.FragmentNews;
 import com.example.shoesstore.Fragment.FragmentSanPham;
 import com.example.shoesstore.Fragment.FragmentThuongHieu;
 import com.example.shoesstore.Fragment.MapsFragment;
@@ -121,6 +122,18 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.nav_maps:
                         replaceFragment(new MapsFragment());
+                        break;
+                    case R.id.nav_fb:
+                        Intent intent_share = new Intent(Intent.ACTION_SEND);
+                        intent_share.setType("text/plain");
+
+                        intent_share.putExtra(Intent.EXTRA_TEXT, "Chia Sẻ Cho Thầy Đi Nào !! \n" +
+                                " https://play.google.com/store/apps/details?id=com.garena.game.kgvn");
+                        intent_share.putExtra(Intent.EXTRA_SUBJECT, "Chia Sẻ  !!");
+                        startActivity(Intent.createChooser(intent_share, "Chia Sẻ Cho Mọi Người"));
+                        break;
+                    case R.id.nav_tintuc:
+                        replaceFragment(new FragmentNews());
                         break;
 
                 }

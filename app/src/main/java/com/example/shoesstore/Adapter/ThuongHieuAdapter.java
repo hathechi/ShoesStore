@@ -3,9 +3,11 @@ package com.example.shoesstore.Adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.shoesstore.Moder.ThuongHieu;
@@ -37,6 +39,9 @@ public class ThuongHieuAdapter extends RecyclerView.Adapter<ThuongHieuAdapter.Th
             return;
         }
         holder.tv_thuonghieu_home.setText(thuongHieu.getName_thuonghieu());
+
+        holder.cardview_thuonghieu.startAnimation(AnimationUtils.loadAnimation(
+                holder.itemView.getContext(),R.anim.animation_1));
     }
 
     @Override
@@ -51,10 +56,12 @@ public class ThuongHieuAdapter extends RecyclerView.Adapter<ThuongHieuAdapter.Th
     public class ThuongHieuViewHoder extends RecyclerView.ViewHolder {
 
         private final TextView tv_thuonghieu_home;
+        private CardView cardview_thuonghieu;
 
         public ThuongHieuViewHoder(@NonNull @NotNull View itemView) {
             super(itemView);
             tv_thuonghieu_home = itemView.findViewById(R.id.tv_thuonghieu_home);
+            cardview_thuonghieu =itemView.findViewById(R.id.cardview_thuonghieu);
         }
     }
 }
