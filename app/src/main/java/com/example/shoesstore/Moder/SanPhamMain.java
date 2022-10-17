@@ -11,12 +11,13 @@ public class SanPhamMain {
     private String mota;
     private String chitiet;
     private String URLImage;
+    private int slNhapvao;
+    private int slDaban;
 
     public SanPhamMain() {
     }
 
-
-    public SanPhamMain(int id_sanpham1, int gia, String name, String thuonghieu, String mota, String chitiet, String URLImage) {
+    public SanPhamMain(int id_sanpham1, int gia, String name, String thuonghieu, String mota, String chitiet, String URLImage, int slNhapvao) {
         this.id_sanpham1 = id_sanpham1;
         this.gia = gia;
         this.name = name;
@@ -24,6 +25,23 @@ public class SanPhamMain {
         this.mota = mota;
         this.chitiet = chitiet;
         this.URLImage = URLImage;
+        this.slNhapvao = slNhapvao;
+    }
+
+    public int getSlNhapvao() {
+        return slNhapvao;
+    }
+
+    public void setSlNhapvao(int slNhapvao) {
+        this.slNhapvao = slNhapvao;
+    }
+
+    public int getSlDaban() {
+        return slDaban;
+    }
+
+    public void setSlDaban(int slDaban) {
+        this.slDaban = slDaban;
     }
 
     public String getMota() {
@@ -90,6 +108,7 @@ public class SanPhamMain {
         result.put("mota", mota);
         result.put("chitiet", chitiet);
         result.put("urlimage", URLImage);
+        result.put("slNhapvao", slNhapvao);
 
 
         return result;

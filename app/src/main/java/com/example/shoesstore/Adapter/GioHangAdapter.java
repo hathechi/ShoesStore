@@ -53,7 +53,8 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.GioHangV
         Glide.with(context).load(mListGioHang.get(position).getURLImage()).into(holder.iv_sanpham1);
         holder.tvThuongHieu.setText(sanPhamMain.getThuonghieu());
         holder.tvMota.setText(sanPhamMain.getMota());
-
+        holder.tvSize.setText("Size: " + sanPhamMain.getSize());
+        holder.tvMau.setText("Màu: " +sanPhamMain.getColor());
         holder.tvSoLuong.setText(String.valueOf(sanPhamMain.getSlHienTai()));
 
         holder.iv_tangsoluong.setOnClickListener(new View.OnClickListener() {
@@ -63,6 +64,7 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.GioHangV
                 holder.tvSoLuong.setText(String.valueOf(slMoiNhat));
                 int slht = sanPhamMain.getSlHienTai();
                 mListGioHang.get(position).setSlHienTai(slMoiNhat);
+                mListGioHang.get(position).setSlMoiNhat(slMoiNhat);
                 int giaht = sanPhamMain.getGiasp();
                 long giamoinhat = (giaht * slMoiNhat) / slht;
                 mListGioHang.get(position).setGiasp((int) giamoinhat);
@@ -94,6 +96,7 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.GioHangV
                     holder.tvSoLuong.setText(String.valueOf(slMoiNhat));
                     int slht = sanPhamMain.getSlHienTai();
                     mListGioHang.get(position).setSlHienTai(slMoiNhat);
+                    mListGioHang.get(position).setSlMoiNhat(slMoiNhat);
                     int giaht = sanPhamMain.getGiasp();
                     long giamoinhat = (giaht * slMoiNhat) / slht;
                     mListGioHang.get(position).setGiasp((int) giamoinhat);
@@ -151,6 +154,8 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.GioHangV
         private final TextView btnTVxoa;
         private final ImageView iv_tangsoluong;
         private final ImageView iv_giamsoluong;
+        private final TextView tvMau;
+        private final TextView tvSize;
 
         public GioHangViewHoder(@NonNull @NotNull View itemView) {
             super(itemView);
@@ -163,6 +168,8 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.GioHangV
             tvSoLuong = itemView.findViewById(R.id.id_soluong);
             iv_giamsoluong = itemView.findViewById(R.id.id_giamsoluong);
             iv_tangsoluong = itemView.findViewById(R.id.id_tangsoluong);
+            tvMau = itemView.findViewById(R.id.tvMau_home);
+            tvSize = itemView.findViewById(R.id.tvSize_home);
         }
     }
 }

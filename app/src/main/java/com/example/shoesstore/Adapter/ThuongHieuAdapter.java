@@ -41,7 +41,14 @@ public class ThuongHieuAdapter extends RecyclerView.Adapter<ThuongHieuAdapter.Th
         holder.tv_thuonghieu_home.setText(thuongHieu.getName_thuonghieu());
 
         holder.cardview_thuonghieu.startAnimation(AnimationUtils.loadAnimation(
-                holder.itemView.getContext(),R.anim.animation_1));
+                holder.itemView.getContext(), R.anim.animation_1));
+
+        holder.cardview_thuonghieu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     @Override
@@ -61,7 +68,7 @@ public class ThuongHieuAdapter extends RecyclerView.Adapter<ThuongHieuAdapter.Th
         public ThuongHieuViewHoder(@NonNull @NotNull View itemView) {
             super(itemView);
             tv_thuonghieu_home = itemView.findViewById(R.id.tv_thuonghieu_home);
-            cardview_thuonghieu =itemView.findViewById(R.id.cardview_thuonghieu);
+            cardview_thuonghieu = itemView.findViewById(R.id.cardview_thuonghieu);
         }
     }
 }

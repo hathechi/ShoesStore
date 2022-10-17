@@ -50,7 +50,10 @@
     </item>
     <item android:title="Chia Sẻ">
         <menu>
-
+            <item
+                android:id="@+id/nav_share_fb"
+                android:icon="@drawable/ic_baseline_public_24"
+                android:title="Chia Sẻ Lên FB" />
             <item
                 android:id="@+id/nav_fb"
                 android:icon="@drawable/icon_share"

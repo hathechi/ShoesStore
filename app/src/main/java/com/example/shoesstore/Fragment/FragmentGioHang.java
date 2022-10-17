@@ -21,9 +21,11 @@ import com.example.shoesstore.Moder.GioHang;
 import com.example.shoesstore.Moder.HoaDon;
 import com.example.shoesstore.R;
 import com.example.shoesstore.SharedPreferences.MySharedPreferences;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.shashank.sony.fancytoastlib.FancyToast;
 
 import org.jetbrains.annotations.NotNull;
@@ -34,13 +36,11 @@ import java.util.List;
 import java.util.Locale;
 
 public class FragmentGioHang extends Fragment {
-    //    public static List<GioHang> mlistGioHang = FragmentHome.mGioHang;
     public static List<GioHang> mlistGioHang = FragmentHome.mGioHangtoFirebase;
     private static TextView tvTongSo;
     private static TextView tvThanhTien;
     private static Button btnXuatHoaDon;
     String user_name_login;
-
     private RecyclerView rcvGioHang;
     private GioHangAdapter gioHangAdapter;
 
@@ -54,6 +54,7 @@ public class FragmentGioHang extends Fragment {
         tvThanhTien.setText((tongtien) + " $");
 
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -87,7 +88,13 @@ public class FragmentGioHang extends Fragment {
                 String listName = "";
                 for (int i = 0; i < mlistGioHang.size(); i++) {
                     tongtien += mlistGioHang.get(i).getGiasp();
-                    listName += "- " + mlistGioHang.get(i).getName() + " (" + mlistGioHang.get(i).getSlHienTai() + ") " + "\n";
+                    listName += "- " + mlistGioHang.get(i).getName() + " (" + mlistGioHang.get(i).getSlHienTai()
+                            + " - " + mlistGioHang.get(i).getColor() + " - " + mlistGioHang.get(i).getSize() + ") " + "\n";
+                    Log.i("a", "onClick: ");
+                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    DatabaseReference myRef = database.getReference("sanpham");
+                    myRef.child((mlistGioHang.get(i).getIdSanpham()) + "/slDaban").
+                            setValue((mlistGioHang.get(i).getSlSanphamDaban() + mlistGioHang.get(i).getSlHienTai()));
                 }
 
                 HoaDon hoaDon = new HoaDon(TimeToday, user_name_login, DateToday, TimeToday, false, listName, tongtien);
@@ -102,7 +109,7 @@ public class FragmentGioHang extends Fragment {
         setAdapterGioHang();
         return view;
     }
-
+  
     public void setAdapterGioHang() {
 
 

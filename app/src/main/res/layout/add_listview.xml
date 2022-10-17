@@ -63,17 +63,37 @@
 
         </LinearLayout>
 
-        <EditText
-            android:id="@+id/etMota"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-            android:layout_height="60dp"
-            android:layout_marginBottom="20dp"
+            <EditText
+                android:id="@+id/etMota"
+                android:layout_width="match_parent"
 
-            android:background="@drawable/botron_edittext"
-            android:ems="10"
-            android:hint="Mô Tả"
-            android:paddingLeft="30dp" />
+                android:layout_height="60dp"
+                android:layout_marginBottom="20dp"
+
+                android:background="@drawable/botron_edittext"
+                android:ems="10"
+                android:hint="Mô Tả"
+                android:paddingLeft="30dp" />
+
+            <EditText
+                android:id="@+id/etSLnhap"
+                android:layout_width="match_parent"
+
+                android:layout_height="60dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/botron_edittext"
+                android:ems="10"
+                android:gravity="center"
+                android:hint="SL Nhập"
+                android:inputType="number" />
+        </LinearLayout>
+
 
         <EditText
             android:id="@+id/etChitiet"

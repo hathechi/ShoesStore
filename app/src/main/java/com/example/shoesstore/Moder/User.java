@@ -5,15 +5,25 @@ public class User {
     private String username;
     private String password;
     private String email;
+    private String ngaytaotk;
 
-    public User(int id, String username, String password, String email) {
+    public User(int id, String username, String password, String email, String ngaytaotk) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
+        this.ngaytaotk = ngaytaotk;
     }
 
     public User() {
+    }
+
+    public String getNgaytaotk() {
+        return ngaytaotk;
+    }
+
+    public void setNgaytaotk(String ngaytaotk) {
+        this.ngaytaotk = ngaytaotk;
     }
 
     public int getId() {

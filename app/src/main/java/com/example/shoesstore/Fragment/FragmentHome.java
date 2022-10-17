@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,6 +18,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -65,6 +66,8 @@ public class FragmentHome extends Fragment {
     private ThuongHieuAdapter thuongHieuAdapter;
     private SanPhamMainAdapter sanPhamMainAdapter;
     private SearchView searchView;
+    private String Color = null;
+    private String Size = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -222,8 +225,14 @@ public class FragmentHome extends Fragment {
                 TextView tvGia = view1.findViewById(R.id.tv_gia_home);
                 TextView tvMota = view1.findViewById(R.id.tv_mota_home);
                 TextView tvChiTiet = view1.findViewById(R.id.tv_chitiet_home);
+                TextView tvSlconlai = view1.findViewById(R.id.tv_soluongcon_home);
                 Button btnAdd = view1.findViewById(R.id.btnAddgiohang);
                 ImageView btnClose = view1.findViewById(R.id.btnClose);
+
+                setBackgroundColorShoes(view1);
+
+                setBackgroundSizeShoes(view1);
+
 
                 //Set data lên
                 tvTitle.setText(sanPhamMain.getName());
@@ -231,6 +240,7 @@ public class FragmentHome extends Fragment {
                 tvMota.setText(sanPhamMain.getMota());
                 tvThuonghieu.setText(sanPhamMain.getThuonghieu());
                 tvChiTiet.setText(sanPhamMain.getChitiet());
+                tvSlconlai.setText(sanPhamMain.getSlNhapvao() + " Đôi");
                 btnClose.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -241,17 +251,24 @@ public class FragmentHome extends Fragment {
                 btnAdd.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        if (Color == null || Size == null) {
+                            FancyToast.makeText(getContext(), "Chưa Chọn Màu Hoặc Size !!",
+                                    FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
+                            return;
+                        }
                         FirebaseDatabase database = FirebaseDatabase.getInstance();
                         DatabaseReference myRef = database.getReference("giohang");
-                        mGioHangtoFirebase.add(new GioHang(sanPhamMain.getGia(), sanPhamMain.getName(), sanPhamMain.getThuonghieu(), sanPhamMain.getMota(), sanPhamMain.getURLImage()));
+                        mGioHangtoFirebase.add(new GioHang(sanPhamMain.getId_sanpham1(), sanPhamMain.getSlDaban(), sanPhamMain.getGia(), sanPhamMain.getName(), sanPhamMain.getThuonghieu(), sanPhamMain.getMota(), sanPhamMain.getURLImage(), Color, Size));
 
                         MySharedPreferences mySharedPreferences = new MySharedPreferences(getContext());
                         String user = mySharedPreferences.getValue("remember_username");
                         myRef.child(user).setValue(mGioHangtoFirebase, new DatabaseReference.CompletionListener() {
                             @Override
                             public void onComplete(@Nullable @org.jetbrains.annotations.Nullable DatabaseError error, @NonNull @NotNull DatabaseReference ref) {
-                                FancyToast.makeText(getContext(), "Thêm Vào Giỏ Hàng Thành Công !!", FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false).show();
-
+                                FancyToast.makeText(getContext(), "Thêm Vào Giỏ Hàng Thành Công !!",
+                                        FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false).show();
+                                Color = null;
+                                Size = null;
                             }
                         });
 
@@ -267,6 +284,103 @@ public class FragmentHome extends Fragment {
                 });
 
 
+            }
+
+            private void setBackgroundSizeShoes(View view1) {
+                CardView size40 = view1.findViewById(R.id.size_40);
+                CardView size41 = view1.findViewById(R.id.size_41);
+                CardView size42 = view1.findViewById(R.id.size_42);
+                CardView size43 = view1.findViewById(R.id.size_43);
+                size40.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        size40.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.purple_200));
+                        size41.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.white));
+                        size42.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.white));
+                        size43.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.white));
+                        Size = "40";
+                    }
+                });
+                size41.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        size41.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.purple_200));
+                        size40.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.white));
+                        size42.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.white));
+                        size43.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.white));
+                        Size = "41";
+                    }
+                });
+                size42.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        size42.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.purple_200));
+                        size41.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.white));
+                        size40.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.white));
+                        size43.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.white));
+                        Size = "42";
+
+                    }
+                });
+                size43.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        size43.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.purple_200));
+                        size41.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.white));
+                        size42.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.white));
+                        size40.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.white));
+                        Size = "43";
+
+                    }
+                });
+            }
+
+            private void setBackgroundColorShoes(View view1) {
+                CardView colorBlack = view1.findViewById(R.id.color_black);
+                CardView colorWhite = view1.findViewById(R.id.color_white);
+                CardView colorOrange = view1.findViewById(R.id.color_orange);
+                CardView colorBlue = view1.findViewById(R.id.color_blue);
+                colorWhite.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        colorWhite.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.boder_imageview));
+                        colorBlack.setBackground(null);
+                        colorBlue.setBackground(null);
+                        colorOrange.setBackground(null);
+                        Color = "Trắng";
+                    }
+                });
+                colorBlack.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        colorBlack.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.boder_imageview));
+                        colorWhite.setBackground(null);
+                        colorBlue.setBackground(null);
+                        colorOrange.setBackground(null);
+                        Color = "Đen";
+
+                    }
+                });
+                colorBlue.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        colorBlue.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.boder_imageview));
+                        colorBlack.setBackground(null);
+                        colorWhite.setBackground(null);
+                        colorOrange.setBackground(null);
+                        Color = "Xanh";
+                    }
+                });
+                colorOrange.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        colorOrange.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.boder_imageview));
+                        colorBlack.setBackground(null);
+                        colorBlue.setBackground(null);
+                        colorWhite.setBackground(null);
+                        Color = "Cam";
+                    }
+                });
             }
 
 

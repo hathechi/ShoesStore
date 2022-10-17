@@ -2,6 +2,7 @@ package com.example.shoesstore;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -23,6 +25,10 @@ import com.example.shoesstore.Fragment.FragmentSanPham;
 import com.example.shoesstore.Fragment.FragmentThuongHieu;
 import com.example.shoesstore.Fragment.MapsFragment;
 import com.example.shoesstore.SharedPreferences.MySharedPreferences;
+import com.facebook.FacebookSdk;
+import com.facebook.share.model.ShareHashtag;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.shashank.sony.fancytoastlib.FancyToast;
@@ -34,12 +40,15 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private TextView tv_header_nav;
     private MySharedPreferences sharedPreferences;
+    private ShareDialog shareDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        shareDialog = new ShareDialog(MainActivity.this);
 
         //set Fragment home cho app
         replaceFragment(new FragmentHome());
@@ -135,6 +144,14 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.nav_tintuc:
                         replaceFragment(new FragmentNews());
                         break;
+                    case R.id.nav_share_fb:
+                        ShareLinkContent linkContent = new ShareLinkContent.Builder()
+                                .setQuote("My APP!!")
+                                .setContentUrl(Uri.parse("https://play.google.com/store/apps/details?id=com.sololearn&hl=vi&gl=US"))
+                                .build();
+
+                        shareDialog.show(linkContent);
+                        break;
 
                 }
 
@@ -162,9 +179,13 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+    }
 
     // chuyển fragment
     public void replaceFragment(Fragment fragment) {

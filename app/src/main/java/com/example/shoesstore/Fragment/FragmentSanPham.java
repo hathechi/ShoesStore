@@ -51,13 +51,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FragmentSanPham} factory method to
- * create an instance of this fragment.
- */
 public class FragmentSanPham extends Fragment {
-    private final List<SanPhamMain> sanPhamMains = new ArrayList<>();
+    public static List<SanPhamMain> sanPhamMains = new ArrayList<>();
     private final List<String> listSpiner = new ArrayList<>();
     ImageButton imgButton_thuonghieu;
     BottomSheetDialog dialog;
@@ -85,7 +80,8 @@ public class FragmentSanPham extends Fragment {
         //set Adapter cho fragment quản lý sản phẩm
         rcvQlsanpham = view.findViewById(R.id.rcv_sanpham_fragment);
         setAdapterQLsanpham();
-
+        //getdataSpinner
+        getDataSpinner();
 
         imgButton_thuonghieu = view.findViewById(R.id.imgButton_add_thuonghieu);
         imgButton_thuonghieu.setOnClickListener(new View.OnClickListener() {
@@ -102,9 +98,13 @@ public class FragmentSanPham extends Fragment {
                 EditText etGiasp = dialogsheetview.findViewById(R.id.etGia);
                 EditText etMota = dialogsheetview.findViewById(R.id.etMota);
                 EditText etChitiet = dialogsheetview.findViewById(R.id.etChitiet);
+                EditText etSlnhap = dialogsheetview.findViewById(R.id.etSLnhap);
                 //spinner
                 spinner = dialogsheetview.findViewById(R.id.spinnerAdd);
-                setAdapterSpinner();
+                //setAdapter
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, listSpiner);
+                spinner.setAdapter(arrayAdapter);
+
                 spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -136,9 +136,11 @@ public class FragmentSanPham extends Fragment {
                         String giasp = (etGiasp.getText().toString());
                         String mota = etMota.getText().toString();
                         String chitiet = etChitiet.getText().toString();
+                        String slNhap = etSlnhap.getText().toString();
 
 
-                        if (tensp.isEmpty() || giasp.isEmpty() || idSp.isEmpty() || mota.isEmpty() || name_thuonghieu == null) {
+                        if (tensp.isEmpty() || giasp.isEmpty() || idSp.isEmpty() || mota.isEmpty() ||
+                                chitiet.isEmpty() || slNhap.isEmpty() || name_thuonghieu == null) {
                             FancyToast.makeText(getContext(), "Chưa Nhập Đủ Dữ Liệu !", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
                         } else {
                             if (uriImage == null) {
@@ -155,7 +157,7 @@ public class FragmentSanPham extends Fragment {
                                 }
                             }
                             //up thông tin sản phẩm lên firebase
-                            uploadSanPhamtoFirebase(uriImage, tensp, mota, chitiet, Integer.parseInt(giasp), Integer.parseInt(idSp), name_thuonghieu);
+                            uploadSanPhamtoFirebase(uriImage, tensp, mota, chitiet, Integer.parseInt(giasp), Integer.parseInt(idSp), name_thuonghieu, Integer.parseInt(slNhap));
 
                         }
 
@@ -168,7 +170,7 @@ public class FragmentSanPham extends Fragment {
     }
 
 
-    private void setAdapterSpinner() {
+    private void getDataSpinner() {
 
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -192,8 +194,6 @@ public class FragmentSanPham extends Fragment {
             }
         });
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, listSpiner);
-        spinner.setAdapter(arrayAdapter);
 
     }
 
@@ -298,10 +298,14 @@ public class FragmentSanPham extends Fragment {
         EditText ten_edit = dialogsheetview.findViewById(R.id.etTensp_edit);
         EditText gia_edit = dialogsheetview.findViewById(R.id.etGiasp_edit);
         EditText mota_edit = dialogsheetview.findViewById(R.id.etMota_edit);
+        EditText slNhap_edit = dialogsheetview.findViewById(R.id.etSLnhap_edit);
         EditText chitiet_edit = dialogsheetview.findViewById(R.id.etChitiet_edit);
 
         spinner = dialogsheetview.findViewById(R.id.spinnerAdd);
-        setAdapterSpinner();
+        //setAdapter
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, listSpiner);
+        spinner.setAdapter(arrayAdapter);
+
         iv_view = dialogsheetview.findViewById(R.id.iv_view);
 
         iv_view.setOnClickListener(new View.OnClickListener() {
@@ -317,6 +321,7 @@ public class FragmentSanPham extends Fragment {
         gia_edit.setText(sanPhamMain.getGia() + "");
         mota_edit.setText(sanPhamMain.getMota());
         chitiet_edit.setText(sanPhamMain.getChitiet());
+        slNhap_edit.setText(sanPhamMain.getSlNhapvao() + "");
         spinner.setSelection(listSpiner.indexOf(sanPhamMain.getThuonghieu()));
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -338,13 +343,14 @@ public class FragmentSanPham extends Fragment {
                 String gia = (gia_edit.getText().toString().trim());
                 String mota = mota_edit.getText().toString().trim();
                 String chitiet = chitiet_edit.getText().toString().trim();
+                String slNhap = slNhap_edit.getText().toString().trim();
 
 
-                if (ten.isEmpty() || gia.isEmpty() || mota.isEmpty() || chitiet.isEmpty() || name_thuonghieu == null || uriImage == null) {
+                if (ten.isEmpty() || gia.isEmpty() || mota.isEmpty() || chitiet.isEmpty() || slNhap.isEmpty() || name_thuonghieu == null || uriImage == null) {
                     FancyToast.makeText(getContext(), "NHẬP ĐỦ DỮ LIỆU", FancyToast.LENGTH_SHORT, FancyToast.ERROR, false).show();
                 } else {
 
-                    updateImage(sanPhamMain, ten, gia, mota, chitiet, name_thuonghieu);
+                    updateImage(sanPhamMain, ten, gia, mota, chitiet, name_thuonghieu, Integer.parseInt(slNhap));
 
                 }
             }
@@ -352,18 +358,14 @@ public class FragmentSanPham extends Fragment {
 
     }
 
-    private void updateImage(SanPhamMain sanPhamMain, String ten, String gia, String mota, String chitiet, String thuonghieu) {
+    private void updateImage(SanPhamMain sanPhamMain, String ten, String gia, String mota, String chitiet, String thuonghieu, int slNhap) {
         FirebaseStorage storage = FirebaseStorage.getInstance("gs://realtimedata-1e0aa.appspot.com");
         StorageReference storageRef = storage.getReference();
         StorageReference mountainImagesRef = storageRef.child(System.currentTimeMillis() + ".PNG");
         //Tạo dialog delay
         ProgressDialog progressDialog = ProgressDialog.show(getContext(), "Chờ Chút", "Sửa Thông Tin Xong ngay đây !!", true);
 
-//        //check hình khi chỉnh sửa
-//        if (uriImage == null) {
-//            uriImage = Uri.parse(sanPhamMain.getURLImage());
-//            Log.i("a", "updateImage: " + uriImage);
-//        }
+
         mountainImagesRef.putFile(uriImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -376,6 +378,7 @@ public class FragmentSanPham extends Fragment {
                         sanPhamMain.setName(ten);
                         sanPhamMain.setThuonghieu(thuonghieu);
                         sanPhamMain.setURLImage(uri.toString());
+                        sanPhamMain.setSlNhapvao(slNhap);
                         SanPhamDAO sanPhamDAO = new SanPhamDAO();
                         sanPhamDAO.updateSanPham(sanPhamMain);
 
@@ -394,7 +397,7 @@ public class FragmentSanPham extends Fragment {
 
     }
 
-    private void uploadSanPhamtoFirebase(Uri uriImage, String name, String mota, String chitiet, int gia, int idsp, String thuonghieu) {
+    private void uploadSanPhamtoFirebase(Uri uriImage, String name, String mota, String chitiet, int gia, int idsp, String thuonghieu, int slNhap) {
         FirebaseStorage storage = FirebaseStorage.getInstance("gs://realtimedata-1e0aa.appspot.com");
         StorageReference storageRef = storage.getReference();
         StorageReference mountainImagesRef = storageRef.child(System.currentTimeMillis() + ".PNG");
@@ -410,7 +413,7 @@ public class FragmentSanPham extends Fragment {
                     public void onSuccess(Uri uri) {
 
                         SanPhamDAO sanPhamDAO = new SanPhamDAO();
-                        sanPhamDAO.insertSanPham(new SanPhamMain(idsp, gia, name, thuonghieu, mota, chitiet, uri.toString()));
+                        sanPhamDAO.insertSanPham(new SanPhamMain(idsp, gia, name, thuonghieu, mota, chitiet, uri.toString(), slNhap));
 
                         progressDialog.dismiss();
                         dialog.cancel();

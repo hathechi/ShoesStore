@@ -27,13 +27,16 @@ import com.shashank.sony.fancytoastlib.FancyToast;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class RegisterActivity extends AppCompatActivity {
+    private final Handler handler = new Handler();
     private Button btnRegis, btnLogin_regis, btnChoice_date;
     private TextInputLayout text_input_user, text_input_pass, text_input_cfpass, text_input_email, text_input_date;
     private TextInputEditText User, Pass, CFpass, Email, Ngaysinh;
-    private final Handler handler = new Handler();
     private CheckBox checkbox_regis;
     private int userID = 0;
 
@@ -101,6 +104,7 @@ public class RegisterActivity extends AppCompatActivity {
         String username = User.getText().toString().trim();
         String pass = Pass.getText().toString().trim();
         String email = Email.getText().toString().trim();
+        String DateToday = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date());
         if (BatLoiSua()) {
             //check trùng username
             FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -138,7 +142,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
                                     //Gửi data lên firebase
-                                    User user = new User(userID + 1, username, pass, email);
+                                    User user = new User(userID + 1, username, pass, email, DateToday);
                                     UserDAO userDAO = new UserDAO();
                                     userDAO.insertUser(user);
                                     FancyToast.makeText(RegisterActivity.this,

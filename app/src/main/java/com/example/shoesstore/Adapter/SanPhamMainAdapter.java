@@ -1,6 +1,7 @@
 package com.example.shoesstore.Adapter;
 
 import android.annotation.SuppressLint;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,6 +78,7 @@ public class SanPhamMainAdapter extends RecyclerView.Adapter<SanPhamMainAdapter.
             @Override
             public void onClick(View view) {
                 iclickAddGioHang.onClickAdd(sanPhamMain);
+
                 //Dùng ContextCompat.getColor(context.getContext(), R.color.pig) để set màu cho imageView
                 holder.ivAddGioHang.setColorFilter(ContextCompat.getColor(context.getContext(), R.color.purple_500));
             }

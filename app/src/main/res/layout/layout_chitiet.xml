@@ -30,14 +30,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="35dp"
-            app:cardCornerRadius="20dp">
+            app:cardCornerRadius="10dp">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:layout_margin="10dp"
-                app:cardCornerRadius="5dp"
-                android:layout_gravity="center_horizontal">
+                app:cardCornerRadius="5dp">
 
                 <TextView
                     android:id="@+id/tv_sanpham1_home"
@@ -49,6 +49,170 @@
                     android:textColor="#FF6D00"
                     android:textSize="24dp"
                     android:textStyle="bold" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_margin="10dp">
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/color_black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            app:cardCornerRadius="100dp">
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+
+                                android:cropToPadding="true"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/dot_black" />
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/color_white"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            app:cardCornerRadius="100dp">
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+                                android:src="@drawable/dot_white" />
+
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/color_orange"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            app:cardCornerRadius="100dp">
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+
+                                android:src="@drawable/dot_orange" />
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/color_blue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            app:cardCornerRadius="100dp">
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+
+                                android:src="@drawable/dot_blue" />
+
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <androidx.cardview.widget.CardView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:id="@+id/size_40">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingLeft="2dp"
+                                android:paddingRight="2dp"
+                                android:text="40"
+                                android:textSize="22dp"
+                                android:textStyle="bold" />
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/size_41"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingLeft="2dp"
+                                android:paddingRight="2dp"
+                                android:text="41"
+                                android:textSize="22dp"
+                                android:textStyle="bold" />
+
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/size_42"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingLeft="2dp"
+                                android:paddingRight="2dp"
+                                android:text="42"
+                                android:textSize="22dp"
+                                android:textStyle="bold" />
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/size_43"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingLeft="2dp"
+                                android:paddingRight="2dp"
+                                android:text="43"
+                                android:textSize="22dp"
+                                android:textStyle="bold" />
+
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+
+                </LinearLayout>
             </androidx.cardview.widget.CardView>
 
             <ImageView
@@ -111,9 +275,19 @@
                         android:layout_height="wrap_content"
 
                         android:padding="5dp"
+                        android:text="Số Lượng Còn: "
+                        android:textColor="#FF6D00"
+                        android:textSize="18dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:padding="5dp"
                         android:text="Chi Tiết: "
                         android:textColor="#FF6D00"
                         android:textSize="18dp" />
+
 
                 </LinearLayout>
 
@@ -153,6 +327,15 @@
                         android:textSize="18dp" />
 
                     <TextView
+                        android:id="@+id/tv_soluongcon_home"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="Số Lượng Còn"
+                        android:textColor="#DD2C00"
+                        android:textSize="18dp" />
+
+                    <TextView
                         android:id="@+id/tv_chitiet_home"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -160,6 +343,7 @@
                         android:text="Chi tiết"
                         android:textColor="#DD2C00"
                         android:textSize="18dp" />
+
 
                 </LinearLayout>
             </LinearLayout>

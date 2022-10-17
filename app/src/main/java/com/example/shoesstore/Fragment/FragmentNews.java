@@ -44,7 +44,6 @@ public class FragmentNews extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_news, container, false);
         new FeedService().execute("https://ngoisao.vnexpress.net/rss/thoi-trang.rss");
-//        new FeedService().execute("https://eva.vn/rss/rss.php/36");
 
         listView = view.findViewById(R.id.lv_news);
         adapter = new NewsAdapter(getContext(), mList);
