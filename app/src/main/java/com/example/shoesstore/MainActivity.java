@@ -1,13 +1,19 @@
+
 package com.example.shoesstore;
 
 import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,7 +24,9 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import com.example.shoesstore.BroadcastReceiver.ThongBaoReceiver;
 import com.example.shoesstore.Fragment.FragmentHome;
 import com.example.shoesstore.Fragment.FragmentNews;
 import com.example.shoesstore.Fragment.FragmentSanPham;
@@ -41,6 +49,10 @@ public class MainActivity extends AppCompatActivity {
     private TextView tv_header_nav;
     private MySharedPreferences sharedPreferences;
     private ShareDialog shareDialog;
+    //BroadcastReceiver
+    private final String ACTION_INTERNET = "internet";
+    private ThongBaoReceiver thongBaoReceiver = new ThongBaoReceiver();
+    private BroadcastReceiver broadcastReceiver ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +68,13 @@ public class MainActivity extends AppCompatActivity {
         //set ToolBar
         final Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
+        //đăng kí broadcast
+        LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReceiver, new IntentFilter(ACTION_INTERNET));
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(thongBaoReceiver, intentFilter);
 
         /////// navigationView
         mDrawerLayout = findViewById(R.id.drawer_layout);
@@ -180,7 +199,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (thongBaoReceiver != null) {
+            unregisterReceiver(thongBaoReceiver);
+        }
+        if (broadcastReceiver != null) {
+            unregisterReceiver(broadcastReceiver);
+        }
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
