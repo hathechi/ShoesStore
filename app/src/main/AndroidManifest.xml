@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+
         android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -18,8 +19,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ShoesStore">
-        <activity android:name=".WebViewActivity"></activity>
-        <activity android:name=".LoadingActivity">
+        <activity
+            android:exported="true" android:name=".WebViewActivity"></activity>
+        <activity android:exported="true" android:name=".LoadingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,12 +33,14 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".ForgotPasswordActivity" />
-        <activity android:name=".RegisterActivity" /> <!-- android:hardwareAccelerated="false" THêm dòng này vào Activity để chạy được trên máy ảo -->
+        <activity android:exported="true" android:name=".ForgotPasswordActivity" />
+        <activity android:exported="true" android:name=".RegisterActivity" /> <!-- android:hardwareAccelerated="false" THêm dòng này vào Activity để chạy được trên máy ảo -->
         <activity
+            android:exported="true"
             android:name=".LoginActivity"
             android:hardwareAccelerated="false" />
         <activity
+            android:exported="true"
             android:name=".ActivityGioHang"
             android:parentActivityName=".MainActivity" />
         <activity android:name=".MainActivity">
