@@ -9,7 +9,7 @@ android {
     defaultConfig {
         applicationId "com.example.shoesstore"
         minSdkVersion 23
-        targetSdkVersion 32
+        targetSdkVersion 31
         versionCode 1
         versionName "1.0"
 
@@ -43,10 +43,10 @@ dependencies {
     implementation "androidx.cardview:cardview:1.0.0"
     implementation "com.google.firebase:firebase-database"
     implementation platform("com.google.firebase:firebase-bom:30.4.1")
-    implementation 'com.github.hydrated:SwipeRevealLayout:cedd8e7'
+    implementation 'com.github.hydrated:SwipeRevealLayout:1.4.0'
     implementation 'com.google.firebase:firebase-storage'
     implementation 'com.github.bumptech.glide:glide:4.13.2'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.2'
+//    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.2'
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.1.+'
     implementation 'com.facebook.android:facebook-share:latest.release'
 }

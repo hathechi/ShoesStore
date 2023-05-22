@@ -259,8 +259,9 @@ public class FragmentHome extends Fragment {
                         FirebaseDatabase database = FirebaseDatabase.getInstance();
                         DatabaseReference myRef = database.getReference("giohang");
                         mGioHangtoFirebase.add(new GioHang(sanPhamMain.getId_sanpham1(), sanPhamMain.getSlDaban(), sanPhamMain.getGia(), sanPhamMain.getName(), sanPhamMain.getThuonghieu(), sanPhamMain.getMota(), sanPhamMain.getURLImage(), Color, Size));
-
-                        MySharedPreferences mySharedPreferences = new MySharedPreferences(getContext());
+                        //Lấy user đang đăng nhập hiện tại để push giỏ hàng lên firebase.
+                        MySharedPreferences mySharedPreferences = new MySharedPreferences(getActivity());
+                        //Nếu khi đăng nhập không  bật lưu mk thì khi chạy dòng dưới sẽ null và crash app
                         String user = mySharedPreferences.getValue("remember_username");
                         myRef.child(user).setValue(mGioHangtoFirebase, new DatabaseReference.CompletionListener() {
                             @Override

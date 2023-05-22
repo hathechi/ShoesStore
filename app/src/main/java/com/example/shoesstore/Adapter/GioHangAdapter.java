@@ -1,5 +1,6 @@
 package com.example.shoesstore.Adapter;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -42,7 +43,7 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.GioHangV
     }
 
     @Override
-    public void onBindViewHolder(@NonNull @NotNull GioHangViewHoder holder, int position) {
+    public void onBindViewHolder(@NonNull @NotNull GioHangViewHoder holder, @SuppressLint("RecyclerView") int position) {
         GioHang sanPhamMain = mListGioHang.get(position);
         if (sanPhamMain == null) {
             return;
